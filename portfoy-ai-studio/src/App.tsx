@@ -29,6 +29,7 @@ import { Card, CardContent, CardHeader, CardTitle, CardDescription } from '@/com
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import { Separator } from '@/components/ui/separator';
+import { Breadcrumb, BreadcrumbList, BreadcrumbItem, BreadcrumbLink, BreadcrumbSeparator, BreadcrumbPage } from '@/components/ui/breadcrumb';
 import { motion, AnimatePresence } from 'motion/react';
 import { UserProfile, Portfolio, Asset } from './types';
 import { fetchStockPrice, fetchCryptoPrice, fetchTefasPrice, fetchPriceHistory } from './services/finance';
@@ -2126,18 +2127,29 @@ export default function App() {
             <main className="flex-1">
                 {user && (
                   <header className="flex h-14 shrink-0 items-center justify-between border-b border-slate-200 dark:border-slate-800 px-4">
-                    <div className="flex items-center gap-3">
-                      <SidebarTrigger className="-ml-1" />
-                      <div className="flex items-center gap-2">
-                        <h1 className="text-sm font-bold text-slate-900 dark:text-white">
-                          {view === 'dashboard' || view === 'assets' ? 'Portfolio' : 
-                           view === 'settings' ? 'Settings' :
-                           view === 'bes' ? 'Devlet Katkısı' :
-                           view === 'passive-income' ? 'Passive Income' :
-                           view === 'admin' ? 'Admin' : 'FinTrack'}
-                        </h1>
-                      </div>
-                    </div>
+                    <Breadcrumb>
+                      <BreadcrumbList>
+                        <BreadcrumbItem>
+                          <BreadcrumbLink onClick={() => setView('dashboard')}>
+                            Dashboard
+                          </BreadcrumbLink>
+                        </BreadcrumbItem>
+                        {view !== 'dashboard' && (
+                          <>
+                            <BreadcrumbSeparator />
+                            <BreadcrumbItem>
+                              <BreadcrumbPage>
+                                {view === 'assets' ? 'Portfolio' : 
+                                 view === 'settings' ? 'Settings' :
+                                 view === 'bes' ? 'Devlet Katkısı' :
+                                 view === 'passive-income' ? 'Passive Income' :
+                                 view === 'admin' ? 'Admin' : 'FinTrack'}
+                              </BreadcrumbPage>
+                            </BreadcrumbItem>
+                          </>
+                        )}
+                      </BreadcrumbList>
+                    </Breadcrumb>
                     {(view === 'dashboard' || view === 'assets') && (
                       <div className="flex items-center gap-2">
                         <select
