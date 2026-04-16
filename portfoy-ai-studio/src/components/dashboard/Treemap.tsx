@@ -1,7 +1,7 @@
 import { useEffect, useRef } from 'react';
 import * as d3 from 'd3';
-import { Layers } from 'lucide-react';
 import { formatCurrency } from '../../lib/utils';
+import { Card } from '@/components/ui/card';
 
 interface TreemapProps {
   data: {
@@ -20,7 +20,7 @@ export function Treemap({ data }: TreemapProps) {
     if (!svgRef.current || !containerRef.current || data.length === 0) return;
 
     const width = containerRef.current.clientWidth;
-    const height = 400;
+    const height = 360;
 
     const svg = d3.select(svgRef.current);
     svg.selectAll("*").remove();
@@ -52,13 +52,13 @@ export function Treemap({ data }: TreemapProps) {
       .attr("x", 5)
       .attr("y", 15)
       .attr("fill", "white")
-      .attr("font-size", "12px")
+      .attr("font-size", "11px")
       .attr("font-weight", "bold")
       .text((d: any) => (d.x1 - d.x0 > 40 && d.y1 - d.y0 > 20) ? (d.data as any).name : "");
 
     leaf.append("text")
       .attr("x", 5)
-      .attr("y", 30)
+      .attr("y", 28)
       .attr("fill", "white")
       .attr("font-size", "10px")
       .attr("opacity", 0.9)
@@ -66,14 +66,14 @@ export function Treemap({ data }: TreemapProps) {
 
     leaf.append("text")
       .attr("x", 5)
-      .attr("y", 45)
+      .attr("y", 42)
       .attr("fill", "white")
       .attr("font-size", "10px")
       .attr("font-weight", "bold")
       .text((d: any) => {
         if (d.x1 - d.x0 > 60 && d.y1 - d.y0 > 55) {
           const p = (d.data as any).percentage;
-          return `${p >= 0 ? '+' : ''}${p.toFixed(2)}%`;
+          return `${p >= 0 ? '+' : ''}${p.toFixed(1)}%`;
         }
         return "";
       });
@@ -81,18 +81,17 @@ export function Treemap({ data }: TreemapProps) {
   }, [data]);
 
   return (
-    <div ref={containerRef} className="w-full bg-white dark:bg-slate-900 rounded-2xl p-4 border border-slate-200 dark:border-slate-800 transition-colors">
-      <div className="flex items-center gap-2 mb-4">
-        <Layers className="w-4 h-4 text-indigo-600" />
-        <h3 className="font-bold text-slate-900 dark:text-white">Asset Allocation</h3>
+    <Card className="p-3 rounded-xl">
+      <p className="text-[11px] font-medium text-slate-500 dark:text-slate-400 mb-3">Asset Allocation</p>
+      <div ref={containerRef} className="w-full">
+        {data.length > 0 ? (
+          <svg ref={svgRef} width="100%" height="360" className="rounded-lg overflow-hidden" />
+        ) : (
+          <div className="h-[360px] flex items-center justify-center text-slate-400 italic text-xs">
+            No data
+          </div>
+        )}
       </div>
-      {data.length > 0 ? (
-        <svg ref={svgRef} width="100%" height="400" className="rounded-lg overflow-hidden" />
-      ) : (
-        <div className="h-[400px] flex items-center justify-center text-slate-400 italic">
-          No data to visualize
-        </div>
-      )}
-    </div>
+    </Card>
   );
 }
