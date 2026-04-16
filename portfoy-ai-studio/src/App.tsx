@@ -30,6 +30,7 @@ import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import { Separator } from '@/components/ui/separator';
 import { Breadcrumb, BreadcrumbList, BreadcrumbItem, BreadcrumbLink, BreadcrumbSeparator, BreadcrumbPage } from '@/components/ui/breadcrumb';
+import { Table, TableHeader, TableBody, TableRow, TableHead, TableCell } from '@/components/ui/table';
 import { motion, AnimatePresence } from 'motion/react';
 import { UserProfile, Portfolio, Asset } from './types';
 import { fetchStockPrice, fetchCryptoPrice, fetchTefasPrice, fetchPriceHistory } from './services/finance';
@@ -1490,22 +1491,22 @@ return (
                   </div>
                 </div>
                 <CardContent className="p-0 overflow-x-auto">
-                  <table className="w-full text-left border-collapse">
-                    <thead>
-                      <tr className="text-[10px] font-bold text-slate-400 dark:text-slate-500 uppercase tracking-wider border-b border-slate-100 dark:border-slate-800">
-                        <th className="px-3 py-2">Asset</th>
-                        <th className="px-3 py-2">Type</th>
-                        <th className="px-3 py-2">Div. Yield</th>
-                        <th className="px-3 py-2">5Y Growth</th>
-                        <th className="px-3 py-2">10Y Growth</th>
-                        <th className="px-3 py-2">Quantity</th>
-                        <th className="px-3 py-2">Purchase Price</th>
-                        <th className="px-3 py-2">Current Value</th>
-                        <th className="px-3 py-2">Gain/Loss</th>
-                        <th className="px-3 py-2 text-right">Actions</th>
-                      </tr>
-                    </thead>
-                    <tbody className="divide-y divide-slate-50 dark:divide-slate-800">
+                  <Table>
+                    <TableHeader>
+                      <TableRow className="text-[10px] font-bold text-slate-400 dark:text-slate-500 uppercase tracking-wider border-b border-slate-100 dark:border-slate-800 hover:bg-transparent">
+                        <TableHead className="px-3 py-2 h-auto">Asset</TableHead>
+                        <TableHead className="px-3 py-2 h-auto">Type</TableHead>
+                        <TableHead className="px-3 py-2 h-auto">Div. Yield</TableHead>
+                        <TableHead className="px-3 py-2 h-auto">5Y Growth</TableHead>
+                        <TableHead className="px-3 py-2 h-auto">10Y Growth</TableHead>
+                        <TableHead className="px-3 py-2 h-auto">Quantity</TableHead>
+                        <TableHead className="px-3 py-2 h-auto">Purchase Price</TableHead>
+                        <TableHead className="px-3 py-2 h-auto">Current Value</TableHead>
+                        <TableHead className="px-3 py-2 h-auto">Gain/Loss</TableHead>
+                        <TableHead className="px-3 py-2 h-auto text-right">Actions</TableHead>
+                      </TableRow>
+                    </TableHeader>
+                    <TableBody className="divide-y divide-slate-50 dark:divide-slate-800">
                       {filteredAssets.map((asset) => {
                         const costBasisRaw = asset.purchasePrice * asset.quantity;
                         const currentValueRaw = (asset.currentPrice ?? asset.purchasePrice) * asset.quantity;
@@ -1523,16 +1524,16 @@ return (
                         const gainLossPercent = (asset.currentPrice !== undefined && asset.currentPrice !== null) ? ((currentValue - costBasis) / costBasis) * 100 : 0;
 
                         return (
-                          <tr key={asset.id} className="hover:bg-slate-50/50 dark:hover:bg-slate-800/50 transition-colors group">
-                            <td className="px-3 py-2">
+                          <TableRow key={asset.id} className="hover:bg-slate-50/50 dark:hover:bg-slate-800/50 transition-colors group">
+                            <TableCell className="px-3 py-2">
                               <div className="flex items-center gap-2">
                                 <div className="flex flex-col">
                                   <span className="font-bold text-[11px] text-slate-900 dark:text-white">{asset.symbol}</span>
                                   <span className="text-[10px] text-slate-500 dark:text-slate-400">{asset.name}</span>
                                 </div>
                               </div>
-                            </td>
-                            <td className="px-3 py-2">
+                            </TableCell>
+                            <TableCell className="px-3 py-2">
                               <div className="flex flex-col gap-0.5">
                                 <span className={cn(
                                   "inline-flex items-center px-1.5 py-0.5 rounded text-[10px] font-bold uppercase tracking-wider w-fit",
@@ -1556,8 +1557,8 @@ return (
                                   </span>
                                 )}
                               </div>
-                            </td>
-                            <td className="px-3 py-2">
+                            </TableCell>
+                            <TableCell className="px-3 py-2">
                               {asset.dividendYield ? (
                                 <span className="text-[10px] font-bold text-gray-700 dark:text-gray-300 bg-gray-200 dark:bg-gray-800 px-1 py-0.5 rounded">
                                   {(asset.dividendYield * 100).toFixed(2)}%
@@ -1565,8 +1566,8 @@ return (
                               ) : (
                                 <span className="text-slate-400 text-[10px]">-</span>
                               )}
-                            </td>
-                            <td className="px-3 py-2">
+                            </TableCell>
+                            <TableCell className="px-3 py-2">
                               {asset.dividendGrowth5Y ? (
                                 <span className={cn(
                                   "text-[10px] font-bold",
@@ -1577,8 +1578,8 @@ return (
                               ) : (
                                 <span className="text-slate-400 text-[10px]">-</span>
                               )}
-                            </td>
-                            <td className="px-3 py-2">
+                            </TableCell>
+                            <TableCell className="px-3 py-2">
                               {asset.dividendGrowth10Y ? (
                                 <span className={cn(
                                   "text-[10px] font-bold",
@@ -1589,14 +1590,14 @@ return (
                               ) : (
                                 <span className="text-slate-400 text-[10px]">-</span>
                               )}
-                            </td>
-                            <td className="px-3 py-2 font-medium text-[11px] text-slate-700 dark:text-slate-300">
+                            </TableCell>
+                            <TableCell className="px-3 py-2 font-medium text-[11px] text-slate-700 dark:text-slate-300">
                               {formatNumber(asset.quantity)}
-                            </td>
-                            <td className="px-3 py-2 text-[11px] text-slate-600 dark:text-slate-400">
+                            </TableCell>
+                            <TableCell className="px-3 py-2 text-[11px] text-slate-600 dark:text-slate-400">
                               {formatCurrency(asset.purchasePrice, 'USD')}
-                            </td>
-                            <td className="px-3 py-2 font-bold text-[11px] text-slate-900 dark:text-white">
+                            </TableCell>
+                            <TableCell className="px-3 py-2 font-bold text-[11px] text-slate-900 dark:text-white">
                               <div className="flex flex-col">
                                 <span>{formatCurrency(currentValue)}</span>
                                 {asset.currentPrice && (
@@ -1605,8 +1606,8 @@ return (
                                   </span>
                                 )}
                               </div>
-                            </td>
-                            <td className="px-3 py-2">
+                            </TableCell>
+                            <TableCell className="px-3 py-2">
                               {asset.currentPrice ? (
                                 <div className="flex flex-col">
                                   <span className={cn(
@@ -1625,8 +1626,8 @@ return (
                               ) : (
                                 <span className="text-slate-400 text-[10px] italic">-</span>
                               )}
-                            </td>
-                            <td className="px-3 py-2 text-right">
+                            </TableCell>
+                            <TableCell className="px-3 py-2 text-right">
                               <div className="flex items-center justify-end gap-1 opacity-0 group-hover:opacity-100 transition-opacity">
                                 <button 
                                   onClick={() => {
@@ -1646,19 +1647,19 @@ return (
                                   <Trash2 className="w-3 h-3" />
                                 </button>
                               </div>
-                            </td>
-                          </tr>
+                            </TableCell>
+                          </TableRow>
                         );
                       })}
                       {filteredAssets.length === 0 && (
-                        <tr>
-                          <td colSpan={10} className="px-3 py-6 text-center text-slate-400 dark:text-slate-500 italic text-[11px]">
+                        <TableRow>
+                          <TableCell colSpan={10} className="px-3 py-6 text-center text-slate-400 dark:text-slate-500 italic text-[11px]">
                             {searchQuery ? "No assets match your search." : "No assets."}
-                          </td>
-                        </tr>
+                          </TableCell>
+                        </TableRow>
                       )}
-                    </tbody>
-                  </table>
+                    </TableBody>
+                  </Table>
                 </CardContent>
               </Card>
             )}
