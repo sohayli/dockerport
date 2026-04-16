@@ -257,8 +257,8 @@ function CSVImportModal({ isOpen, onClose, onImport }: { isOpen: boolean; onClos
         className="bg-white dark:bg-slate-900 rounded-2xl p-6 w-full max-w-md shadow-xl border border-slate-200 dark:border-slate-800 transition-colors"
       >
         <div className="flex items-center gap-3 mb-4">
-          <div className="w-10 h-10 bg-indigo-50 dark:bg-indigo-900/30 rounded-xl flex items-center justify-center">
-            <FileUp className="text-indigo-600 dark:text-indigo-400 w-5 h-5" />
+          <div className="w-10 h-10 bg-gray-100 dark:bg-gray-800 rounded-xl flex items-center justify-center">
+            <FileUp className="text-gray-700 dark:text-gray-300 w-5 h-5" />
           </div>
           <h3 className="text-lg font-semibold text-slate-900 dark:text-white">Import from CSV</h3>
         </div>
@@ -268,7 +268,7 @@ function CSVImportModal({ isOpen, onClose, onImport }: { isOpen: boolean; onClos
         </p>
 
         <div className="space-y-4">
-          <div className="border-2 border-dashed border-slate-200 dark:border-slate-800 rounded-xl p-8 text-center hover:border-indigo-400 transition-colors cursor-pointer relative">
+          <div className="border-2 border-dashed border-slate-200 dark:border-slate-800 rounded-xl p-8 text-center hover:border-gray-500 transition-colors cursor-pointer relative">
             <input 
               type="file" 
               accept=".csv" 
@@ -292,7 +292,7 @@ function CSVImportModal({ isOpen, onClose, onImport }: { isOpen: boolean; onClos
         <div className="mt-6 flex gap-3">
           <button 
             onClick={onClose}
-            className="flex-1 px-4 py-2 border border-slate-300 dark:border-slate-700 text-slate-700 dark:text-slate-300 rounded-lg hover:bg-slate-50 dark:hover:bg-slate-800 transition-colors"
+            className="flex-1 px-4 py-2 border border-slate-300 dark:border-slate-700 text-slate-700 dark:text-slate-300 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-800 transition-colors"
           >
             Cancel
           </button>
@@ -338,7 +338,7 @@ function DeleteAllAssetsModal({ isOpen, onClose, onConfirm }: { isOpen: boolean;
         <div className="flex gap-3">
           <button 
             onClick={onClose}
-            className="flex-1 px-4 py-2 border border-slate-300 dark:border-slate-700 text-slate-700 dark:text-slate-300 rounded-lg hover:bg-slate-50 dark:hover:bg-slate-800 transition-colors"
+            className="flex-1 px-4 py-2 border border-slate-300 dark:border-slate-700 text-slate-700 dark:text-slate-300 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-800 transition-colors"
           >
             Cancel
           </button>
@@ -451,7 +451,7 @@ function AddAssetModal({ isOpen, onClose, onAdd }: { isOpen: boolean; onClose: (
         <div className="flex items-center justify-between mb-4">
           <h3 className="text-lg font-semibold text-slate-900 dark:text-white">Add Asset</h3>
           {isFetching && (
-            <div className="flex items-center gap-2 text-xs text-indigo-600 animate-pulse">
+            <div className="flex items-center gap-2 text-xs text-gray-600 animate-pulse">
               <RefreshCw className="w-3 h-3 animate-spin" />
               Fetching price...
             </div>
@@ -467,7 +467,7 @@ function AddAssetModal({ isOpen, onClose, onAdd }: { isOpen: boolean; onClose: (
                 onChange={(e) => setSymbol(e.target.value.toUpperCase())}
                 placeholder="AAPL, BTC..."
                 autoComplete="off"
-                className="w-full px-3 py-2 border border-slate-300 dark:border-slate-700 bg-white dark:bg-slate-800 text-slate-900 dark:text-white rounded-lg focus:ring-2 focus:ring-indigo-500 outline-none transition-colors"
+                className="w-full px-3 py-2 border border-slate-300 dark:border-slate-700 bg-white dark:bg-slate-800 text-slate-900 dark:text-white rounded-lg focus:ring-2 focus:ring-gray-500 outline-none transition-colors"
               />
             </div>
             <div>
@@ -475,7 +475,7 @@ function AddAssetModal({ isOpen, onClose, onAdd }: { isOpen: boolean; onClose: (
               <select 
                 value={type}
                 onChange={(e) => setType(e.target.value as Asset['type'])}
-                className="w-full px-3 py-2 border border-slate-300 dark:border-slate-700 bg-white dark:bg-slate-800 text-slate-900 dark:text-white rounded-lg focus:ring-2 focus:ring-indigo-500 outline-none transition-colors"
+                className="w-full px-3 py-2 border border-slate-300 dark:border-slate-700 bg-white dark:bg-slate-800 text-slate-900 dark:text-white rounded-lg focus:ring-2 focus:ring-gray-500 outline-none transition-colors"
               >
                 <option value="Stock">Stock</option>
                 <option value="Crypto">Crypto</option>
@@ -505,7 +505,7 @@ function AddAssetModal({ isOpen, onClose, onAdd }: { isOpen: boolean; onClose: (
                 onChange={(e) => setQuantity(e.target.value)}
                 placeholder="0.00"
                 autoComplete="off"
-                className="w-full px-3 py-2 border border-slate-300 dark:border-slate-700 bg-white dark:bg-slate-800 text-slate-900 dark:text-white rounded-lg focus:ring-2 focus:ring-indigo-500 outline-none transition-colors"
+                className="w-full px-3 py-2 border border-slate-300 dark:border-slate-700 bg-white dark:bg-slate-800 text-slate-900 dark:text-white rounded-lg focus:ring-2 focus:ring-gray-500 outline-none transition-colors"
               />
             </div>
             <div>
@@ -515,7 +515,7 @@ function AddAssetModal({ isOpen, onClose, onAdd }: { isOpen: boolean; onClose: (
                   <button 
                     type="button"
                     onClick={() => setPrice(currentPrice.toString())}
-                    className="flex items-center gap-1 text-[10px] font-bold text-indigo-600 dark:text-indigo-400 bg-indigo-50 dark:bg-indigo-900/30 px-1.5 py-0.5 rounded hover:bg-indigo-100 dark:hover:bg-indigo-800/50 transition-colors"
+                    className="flex items-center gap-1 text-[10px] font-bold text-gray-700 dark:text-gray-300 bg-gray-100 dark:bg-gray-800 px-1.5 py-0.5 rounded hover:bg-gray-200 dark:hover:bg-gray-700 transition-colors"
                     title="Copy live price to purchase price"
                   >
                     <RefreshCw className="w-2.5 h-2.5" />
@@ -529,7 +529,7 @@ function AddAssetModal({ isOpen, onClose, onAdd }: { isOpen: boolean; onClose: (
                 onChange={(e) => setPrice(e.target.value)}
                 placeholder="0.00"
                 autoComplete="off"
-                className="w-full px-3 py-2 border border-slate-300 dark:border-slate-700 bg-white dark:bg-slate-800 text-slate-900 dark:text-white rounded-lg focus:ring-2 focus:ring-indigo-500 outline-none transition-colors"
+                className="w-full px-3 py-2 border border-slate-300 dark:border-slate-700 bg-white dark:bg-slate-800 text-slate-900 dark:text-white rounded-lg focus:ring-2 focus:ring-gray-500 outline-none transition-colors"
               />
             </div>
           </div>
@@ -546,7 +546,7 @@ function AddAssetModal({ isOpen, onClose, onAdd }: { isOpen: boolean; onClose: (
                 onChange={(e) => setDividendYield(e.target.value)}
                 placeholder="e.g. 4.5"
                 autoComplete="off"
-                className="w-full px-3 py-2 border border-slate-300 dark:border-slate-700 bg-white dark:bg-slate-800 text-slate-900 dark:text-white rounded-lg focus:ring-2 focus:ring-indigo-500 outline-none transition-colors"
+                className="w-full px-3 py-2 border border-slate-300 dark:border-slate-700 bg-white dark:bg-slate-800 text-slate-900 dark:text-white rounded-lg focus:ring-2 focus:ring-gray-500 outline-none transition-colors"
               />
             </div>
           )}
@@ -568,7 +568,7 @@ function AddAssetModal({ isOpen, onClose, onAdd }: { isOpen: boolean; onClose: (
         <div className="mt-6 flex gap-3">
           <button 
             onClick={handleClose}
-            className="flex-1 px-4 py-2 border border-slate-300 dark:border-slate-700 text-slate-700 dark:text-slate-300 rounded-lg hover:bg-slate-50 dark:hover:bg-slate-800 transition-colors"
+            className="flex-1 px-4 py-2 border border-slate-300 dark:border-slate-700 text-slate-700 dark:text-slate-300 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-800 transition-colors"
           >
             Cancel
           </button>
@@ -691,7 +691,7 @@ function EditAssetModal({ isOpen, onClose, onEdit, asset }: { isOpen: boolean; o
         <div className="flex items-center justify-between mb-4">
           <h3 className="text-lg font-semibold text-slate-900 dark:text-white">Edit Asset</h3>
           {isFetching && (
-            <div className="flex items-center gap-2 text-xs text-indigo-600 animate-pulse">
+            <div className="flex items-center gap-2 text-xs text-gray-600 animate-pulse">
               <RefreshCw className="w-3 h-3 animate-spin" />
               Fetching price...
             </div>
@@ -707,7 +707,7 @@ function EditAssetModal({ isOpen, onClose, onEdit, asset }: { isOpen: boolean; o
                 onChange={(e) => setSymbol(e.target.value.toUpperCase())}
                 placeholder="AAPL, BTC..."
                 autoComplete="off"
-                className="w-full px-3 py-2 border border-slate-300 dark:border-slate-700 bg-white dark:bg-slate-800 text-slate-900 dark:text-white rounded-lg focus:ring-2 focus:ring-indigo-500 outline-none transition-colors"
+                className="w-full px-3 py-2 border border-slate-300 dark:border-slate-700 bg-white dark:bg-slate-800 text-slate-900 dark:text-white rounded-lg focus:ring-2 focus:ring-gray-500 outline-none transition-colors"
               />
             </div>
             <div>
@@ -715,7 +715,7 @@ function EditAssetModal({ isOpen, onClose, onEdit, asset }: { isOpen: boolean; o
               <select 
                 value={type}
                 onChange={(e) => setType(e.target.value as Asset['type'])}
-                className="w-full px-3 py-2 border border-slate-300 dark:border-slate-700 bg-white dark:bg-slate-800 text-slate-900 dark:text-white rounded-lg focus:ring-2 focus:ring-indigo-500 outline-none transition-colors"
+                className="w-full px-3 py-2 border border-slate-300 dark:border-slate-700 bg-white dark:bg-slate-800 text-slate-900 dark:text-white rounded-lg focus:ring-2 focus:ring-gray-500 outline-none transition-colors"
               >
                 <option value="Stock">Stock</option>
                 <option value="Crypto">Crypto</option>
@@ -745,7 +745,7 @@ function EditAssetModal({ isOpen, onClose, onEdit, asset }: { isOpen: boolean; o
                 onChange={(e) => setQuantity(e.target.value)}
                 placeholder="0.00"
                 autoComplete="off"
-                className="w-full px-3 py-2 border border-slate-300 dark:border-slate-700 bg-white dark:bg-slate-800 text-slate-900 dark:text-white rounded-lg focus:ring-2 focus:ring-indigo-500 outline-none transition-colors"
+                className="w-full px-3 py-2 border border-slate-300 dark:border-slate-700 bg-white dark:bg-slate-800 text-slate-900 dark:text-white rounded-lg focus:ring-2 focus:ring-gray-500 outline-none transition-colors"
               />
             </div>
             <div>
@@ -755,7 +755,7 @@ function EditAssetModal({ isOpen, onClose, onEdit, asset }: { isOpen: boolean; o
                   <button 
                     type="button"
                     onClick={() => setPrice(currentPrice.toString())}
-                    className="flex items-center gap-1 text-[10px] font-bold text-indigo-600 dark:text-indigo-400 bg-indigo-50 dark:bg-indigo-900/30 px-1.5 py-0.5 rounded hover:bg-indigo-100 dark:hover:bg-indigo-800/50 transition-colors"
+                    className="flex items-center gap-1 text-[10px] font-bold text-gray-700 dark:text-gray-300 bg-gray-100 dark:bg-gray-800 px-1.5 py-0.5 rounded hover:bg-gray-200 dark:hover:bg-gray-700 transition-colors"
                     title="Copy live price to purchase price"
                   >
                     <RefreshCw className="w-2.5 h-2.5" />
@@ -769,7 +769,7 @@ function EditAssetModal({ isOpen, onClose, onEdit, asset }: { isOpen: boolean; o
                 onChange={(e) => setPrice(e.target.value)}
                 placeholder="0.00"
                 autoComplete="off"
-                className="w-full px-3 py-2 border border-slate-300 dark:border-slate-700 bg-white dark:bg-slate-800 text-slate-900 dark:text-white rounded-lg focus:ring-2 focus:ring-indigo-500 outline-none transition-colors"
+                className="w-full px-3 py-2 border border-slate-300 dark:border-slate-700 bg-white dark:bg-slate-800 text-slate-900 dark:text-white rounded-lg focus:ring-2 focus:ring-gray-500 outline-none transition-colors"
               />
             </div>
           </div>
@@ -786,7 +786,7 @@ function EditAssetModal({ isOpen, onClose, onEdit, asset }: { isOpen: boolean; o
                 onChange={(e) => setDividendYield(e.target.value)}
                 placeholder="e.g. 4.5"
                 autoComplete="off"
-                className="w-full px-3 py-2 border border-slate-300 dark:border-slate-700 bg-white dark:bg-slate-800 text-slate-900 dark:text-white rounded-lg focus:ring-2 focus:ring-indigo-500 outline-none transition-colors"
+                className="w-full px-3 py-2 border border-slate-300 dark:border-slate-700 bg-white dark:bg-slate-800 text-slate-900 dark:text-white rounded-lg focus:ring-2 focus:ring-gray-500 outline-none transition-colors"
               />
             </div>
           )}
@@ -808,7 +808,7 @@ function EditAssetModal({ isOpen, onClose, onEdit, asset }: { isOpen: boolean; o
         <div className="mt-6 flex gap-3">
           <button 
             onClick={handleClose}
-            className="flex-1 px-4 py-2 border border-slate-300 dark:border-slate-700 text-slate-700 dark:text-slate-300 rounded-lg hover:bg-slate-50 dark:hover:bg-slate-800 transition-colors"
+            className="flex-1 px-4 py-2 border border-slate-300 dark:border-slate-700 text-slate-700 dark:text-slate-300 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-800 transition-colors"
           >
             Cancel
           </button>
@@ -1432,7 +1432,7 @@ return (
             ) : (
 /* Assets Table View */
               <Card className="rounded-xl overflow-hidden">
-                <div className="px-3 py-2 border-b border-slate-100 dark:border-slate-800 flex flex-col sm:flex-row sm:items-center justify-between gap-2 bg-slate-50/50 dark:bg-slate-800/50">
+                <div className="px-3 py-2 border-b border-slate-100 dark:border-slate-800 flex flex-col sm:flex-row sm:items-center justify-between gap-2 bg-gray-100/50 dark:bg-gray-800/50">
                   <p className="text-[11px] font-medium text-slate-500 dark:text-slate-400">Holdings</p>
                   
                   <div className="flex items-center gap-2">
@@ -1456,7 +1456,7 @@ return (
                         placeholder="Search..."
                         value={searchQuery}
                         onChange={(e) => setSearchQuery(e.target.value)}
-                        className="w-full sm:w-48 pl-3 pr-3 py-1.5 bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-lg text-xs focus:ring-2 focus:ring-indigo-500 outline-none transition-all"
+                        className="w-full sm:w-48 pl-3 pr-3 py-1.5 bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-lg text-xs focus:ring-2 focus:ring-gray-500 outline-none transition-all"
                       />
                     </div>
                     <button 
@@ -1632,7 +1632,7 @@ return (
                                     setEditingAsset(asset);
                                     setIsEditAssetOpen(true);
                                   }}
-                                  className="p-1 text-slate-300 dark:text-slate-600 hover:text-indigo-600 dark:hover:text-indigo-400 transition-colors"
+                                  className="p-1 text-slate-300 dark:text-slate-600 hover:text-gray-700 dark:hover:text-gray-300 transition-colors"
                                   title="Edit"
                                 >
                                   <Pencil className="w-3 h-3" />
@@ -2107,10 +2107,10 @@ export default function App() {
 
   if (loading) {
     return (
-      <div className="min-h-screen flex items-center justify-center bg-slate-50 dark:bg-slate-950 transition-colors">
+      <div className="min-h-screen flex items-center justify-center bg-gray-100 dark:bg-gray-900 transition-colors">
         <div className="flex flex-col items-center gap-4">
-          <div className="w-12 h-12 border-4 border-indigo-600 border-t-transparent rounded-full animate-spin" />
-          <p className="text-slate-500 dark:text-slate-400 font-medium animate-pulse">Loading FinTrack...</p>
+          <div className="w-12 h-12 border-4 border-gray-700 border-t-transparent rounded-full animate-spin" />
+          <p className="text-gray-500 dark:text-gray-400 font-medium animate-pulse">Loading FinTrack...</p>
         </div>
       </div>
     );
@@ -2143,7 +2143,7 @@ export default function App() {
                         <select
                           value={selectedPortfolioId || 'all'}
                           onChange={(e) => setSelectedPortfolioId(e.target.value)}
-                          className="appearance-none bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 text-slate-900 dark:text-white px-3 py-1.5 pr-8 rounded-lg text-xs font-medium focus:ring-2 focus:ring-indigo-500 outline-none cursor-pointer"
+                          className="appearance-none bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 text-slate-900 dark:text-white px-3 py-1.5 pr-8 rounded-lg text-xs font-medium focus:ring-2 focus:ring-gray-500 outline-none cursor-pointer"
                         >
                           <option value="all">All</option>
                           {portfolios.map(p => (

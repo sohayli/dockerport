@@ -65,14 +65,14 @@ export function Settings({ profile, onUpdateProfile, portfolios, onAddPortfolio,
                 {portfolios.map((portfolio) => (
                   <Card key={portfolio.id} className="flex items-center justify-between p-5">
                     <div className="flex items-center gap-4">
-                      <div className="w-12 h-12 bg-indigo-50 dark:bg-indigo-900/30 rounded-2xl flex items-center justify-center">
-                        <Wallet className="text-indigo-600 dark:text-indigo-400 w-6 h-6" />
+                      <div className="w-12 h-12 bg-gray-100 dark:bg-gray-800 rounded-2xl flex items-center justify-center">
+                        <Wallet className="text-gray-700 dark:text-gray-300 w-6 h-6" />
                       </div>
                       <div>
                         <h4 className="font-bold text-slate-900 dark:text-white">{portfolio.name}</h4>
                         <p className="text-sm text-slate-500 dark:text-slate-400">{portfolio.description || 'No description'}</p>
                         {portfolio.monthlyGoal && (
-                          <p className="text-xs text-indigo-600 dark:text-indigo-400 font-bold mt-1">
+                          <p className="text-xs text-gray-700 dark:text-gray-300 font-bold mt-1">
                             Goal: {formatCurrency(portfolio.monthlyGoal)} / month
                           </p>
                         )}
@@ -137,7 +137,7 @@ export function Settings({ profile, onUpdateProfile, portfolios, onAddPortfolio,
                       type="text"
                       value={profile.displayName}
                       onChange={(e) => onUpdateProfile({ displayName: e.target.value })}
-                      className="w-full px-4 py-2 bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-xl outline-none focus:ring-2 focus:ring-indigo-500 transition-all"
+                      className="w-full px-4 py-2 bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-xl outline-none focus:ring-2 focus:ring-gray-500 transition-all"
                     />
                   </div>
                   <div>
@@ -155,7 +155,7 @@ export function Settings({ profile, onUpdateProfile, portfolios, onAddPortfolio,
                       type="date"
                       value={profile.birthDate || ''}
                       onChange={(e) => onUpdateProfile({ birthDate: e.target.value })}
-                      className="w-full px-4 py-2 bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-xl outline-none focus:ring-2 focus:ring-indigo-500 transition-all"
+                      className="w-full px-4 py-2 bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-xl outline-none focus:ring-2 focus:ring-gray-500 transition-all"
                     />
                   </div>
                 </Card>
@@ -165,7 +165,7 @@ export function Settings({ profile, onUpdateProfile, portfolios, onAddPortfolio,
                     <TrendingUp className="w-5 h-5 text-indigo-600" />
                     <h4 className="font-bold text-slate-900 dark:text-white">BES (Devlet Katkısı) Bilgisi</h4>
                   </div>
-                  <div className="p-4 bg-white dark:bg-slate-900 rounded-2xl border border-indigo-100 dark:border-indigo-900/30 space-y-2">
+                  <div className="p-4 bg-white dark:bg-slate-900 rounded-2xl border border-gray-200 dark:border-gray-700 space-y-2">
                     <p className="text-xs text-slate-600 dark:text-slate-400">
                       Devlet katkısı hakediş hesaplamaları artık her portföy için özel olarak yapılmaktadır. 
                       Portföy ayarlarından doğum tarihi ve sisteme giriş tarihini güncelleyebilirsiniz.

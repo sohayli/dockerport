@@ -147,7 +147,7 @@ export function GovernmentContributionView({ portfolios, onUpdatePortfolio }: Go
       </div>
 
       {/* Rules Info */}
-      <Card className="p-4 bg-indigo-50/50 dark:bg-indigo-900/10 border-indigo-100 dark:border-indigo-900/30 flex items-start gap-3">
+      <Card className="p-4 bg-indigo-50/50 dark:bg-indigo-900/10 border-gray-200 dark:border-gray-700 flex items-start gap-3">
         <Info className="w-5 h-5 text-indigo-600 mt-0.5" />
         <div className="text-sm text-indigo-900 dark:text-indigo-300">
           <p className="font-bold mb-1">Hakediş Kuralları:</p>

@@ -201,7 +201,7 @@ export function PassiveIncomeView({ portfolios }: PassiveIncomeViewProps) {
           <p className="text-xs text-slate-400 mt-2">Ağırlıklı Ortalama (5Y/10Y)</p>
         </Card>
 
-        <Card className="p-6 border-indigo-100 dark:border-indigo-900/30 bg-indigo-50/10">
+        <Card className="p-6 border-gray-200 dark:border-gray-700 bg-indigo-50/10">
           <div className="flex items-center justify-between mb-4">
             <div className="flex items-center gap-3">
               <div className="w-10 h-10 bg-indigo-100 dark:bg-indigo-900/40 rounded-xl flex items-center justify-center">
@@ -355,7 +355,7 @@ export function PassiveIncomeView({ portfolios }: PassiveIncomeViewProps) {
               Portföyünüzün ağırlıklı temettü büyüme oranı <strong>%{stats.weightedGrowth.toFixed(2)}</strong>. 
               Bu oran, şirketlerinizin her yıl temettülerini ne kadar artırdığını gösterir.
             </p>
-            <div className="p-4 bg-indigo-50 dark:bg-indigo-900/20 rounded-2xl border border-indigo-100 dark:border-indigo-900/30">
+            <div className="p-4 bg-indigo-50 dark:bg-indigo-900/20 rounded-2xl border border-gray-200 dark:border-gray-700">
               <p className="text-indigo-900 dark:text-indigo-300 font-medium">
                 İpucu: Temettü büyüme oranı enflasyonun üzerindeyse, alım gücünüz zamanla artacaktır.
               </p>
