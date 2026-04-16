@@ -3,9 +3,10 @@ import * as d3 from 'd3';
 import Papa from 'papaparse';
 import React from 'react';
 import { AuthContext, ThemeContext } from './context';
+import { Theme as RadixTheme } from '@radix-ui/themes';
 
 type ThemeGrayColor = 'gray' | 'slate';
-type ThemeAccentColor = 'gray' | 'blue' | 'violet' | 'purple' | 'plum' | 'crimson' | 'red' | 'ruby' | 'green' | 'jade' | 'teal' | 'cyan' | 'amber' | 'yellow' | 'gold' | 'orange' | 'tomato';
+type ThemeAccentColor = 'gray' | 'blue' | 'indigo' | 'violet' | 'purple' | 'plum' | 'crimson' | 'red' | 'ruby' | 'green' | 'jade' | 'teal' | 'cyan' | 'amber' | 'yellow' | 'gold' | 'orange' | 'tomato';
 import { 
   getUser,
   createUser,
@@ -2142,9 +2143,16 @@ export default function App() {
   return (
     <AuthContext.Provider value={{ user, profile, loading }}>
       <ThemeContext.Provider value={{ isDark, toggleTheme, grayColor, accentColor, setColorScale }}>
-        <TooltipProvider>
-          <SidebarProvider>
-            <div className="min-h-screen bg-gray-100 dark:bg-gray-900 font-sans selection:bg-gray-300 dark:selection:bg-gray-700 selection:text-gray-900 dark:selection:bg-gray-100 transition-colors flex w-full">
+        <RadixTheme 
+          appearance={isDark ? 'dark' : 'light'} 
+          grayColor={grayColor}
+          accentColor={accentColor}
+          radius="medium"
+          scaling="100%"
+        >
+          <TooltipProvider>
+            <SidebarProvider>
+              <div className="min-h-screen bg-gray-100 dark:bg-gray-900 font-sans selection:bg-gray-300 dark:selection:bg-gray-700 selection:text-gray-900 dark:selection:bg-gray-100 transition-colors flex w-full">
             {user && <AppSidebar user={user} profile={profile} currentView={view} currentSettingsTab={settingsTab} setView={setView} setSettingsTab={setSettingsTab} />}
             <main className="flex-1">
                 {user && (
@@ -2236,7 +2244,8 @@ export default function App() {
               </main>
             </div>
           </SidebarProvider>
-        </TooltipProvider>
+          </TooltipProvider>
+        </RadixTheme>
       </ThemeContext.Provider>
     </AuthContext.Provider>
   );

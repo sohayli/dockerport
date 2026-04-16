@@ -54,7 +54,7 @@ export function AppSidebar({ user, profile, currentView, currentSettingsTab, set
     : []
 
   return (
-    <Sidebar>
+      <Sidebar>
       <SidebarHeader className="border-b border-slate-200 dark:border-slate-800">
         <SidebarMenu>
           <SidebarMenuItem>
