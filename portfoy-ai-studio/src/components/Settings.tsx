@@ -10,7 +10,9 @@ import {
   Database,
   TrendingUp,
   Pencil,
-  Palette
+  Palette,
+  Moon,
+  Sun
 } from 'lucide-react';
 import { motion, AnimatePresence } from 'motion/react';
 import { Portfolio, UserProfile } from '../types';
