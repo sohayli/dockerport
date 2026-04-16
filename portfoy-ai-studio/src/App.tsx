@@ -2121,7 +2121,7 @@ export default function App() {
       <ThemeContext.Provider value={{ isDark, toggleTheme }}>
         <TooltipProvider>
           <SidebarProvider>
-            <div className="min-h-screen bg-slate-50 dark:bg-slate-950 font-sans selection:bg-indigo-100 dark:selection:bg-indigo-900 selection:text-indigo-900 dark:selection:text-indigo-100 transition-colors flex w-full">
+            <div className="min-h-screen bg-gray-100 dark:bg-gray-900 font-sans selection:bg-indigo-100 dark:selection:bg-indigo-900 selection:text-indigo-900 dark:selection:text-indigo-100 transition-colors flex w-full">
               {user && <AppSidebar user={user} profile={profile} currentView={view} currentSettingsTab={settingsTab} setView={setView} setSettingsTab={setSettingsTab} />}
               <main className="flex-1">
                 {user && (
