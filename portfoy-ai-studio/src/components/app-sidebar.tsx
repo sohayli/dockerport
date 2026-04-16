@@ -58,7 +58,7 @@ export function AppSidebar({ user, profile, currentView, currentSettingsTab, set
         <SidebarMenu>
           <SidebarMenuItem>
             <SidebarMenuButton size="lg" onClick={() => setView('dashboard')}>
-              <div className="flex aspect-square size-8 items-center justify-center rounded-lg bg-indigo-600 text-white">
+              <div className="flex aspect-square size-8 items-center justify-center rounded-lg bg-gray-800 text-white">
                 <TrendingUp className="size-4" />
               </div>
               <div className="flex flex-col gap-0.5 leading-none">
@@ -159,7 +159,7 @@ export function AppSidebar({ user, profile, currentView, currentSettingsTab, set
               <SidebarMenuButton size="lg">
                 <Avatar className="size-8">
                   <AvatarImage src={user.avatarUrl} alt={user.displayName || user.email} />
-                  <AvatarFallback className="bg-indigo-100 dark:bg-indigo-900/30 text-indigo-600 dark:text-indigo-400 text-sm font-bold">
+                  <AvatarFallback className="bg-gray-200 dark:bg-gray-800 text-gray-700 dark:text-gray-300 text-sm font-bold">
                     {user.displayName?.charAt(0).toUpperCase() || user.email?.charAt(0).toUpperCase()}
                   </AvatarFallback>
                 </Avatar>
