@@ -1438,70 +1438,70 @@ function Dashboard({ view, portfolios, setView }: { view: 'dashboard' | 'assets'
             {view === 'dashboard' ? (
               <>
                 {/* Summary Cards */}
-                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-                  <Card className="p-6 rounded-2xl">
-                    <div className="flex items-center justify-between mb-4">
-                      <div className="w-10 h-10 bg-emerald-50 dark:bg-emerald-900/20 rounded-xl flex items-center justify-center">
-                        <TrendingUp className="text-emerald-600 dark:text-emerald-400 w-5 h-5" />
+                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
+                  <Card className="p-4 rounded-xl">
+                    <div className="flex items-center justify-between mb-3">
+                      <div className="w-8 h-8 bg-emerald-50 dark:bg-emerald-900/20 rounded-lg flex items-center justify-center">
+                        <TrendingUp className="text-emerald-600 dark:text-emerald-400 w-4 h-4" />
                       </div>
-                      <span className="text-xs font-bold text-emerald-600 bg-emerald-50 dark:bg-emerald-900/20 px-2 py-1 rounded-lg">Live</span>
+                      <span className="text-[10px] font-bold text-emerald-600 bg-emerald-50 dark:bg-emerald-900/20 px-1.5 py-0.5 rounded">Live</span>
                     </div>
-                    <CardTitle className="text-sm font-medium text-slate-500 dark:text-slate-400 uppercase tracking-wider">Total Value</CardTitle>
-                    <CardContent className="text-3xl font-bold text-slate-900 dark:text-white mt-1 p-0">{formatCurrency(totalValue)}</CardContent>
-                    <CardDescription className="text-xs text-slate-400 mt-2">Converted to USD</CardDescription>
+                    <p className="text-[11px] font-medium text-slate-500 dark:text-slate-400 uppercase tracking-wide">Total Value</p>
+                    <p className="text-2xl font-bold text-slate-900 dark:text-white mt-1">{formatCurrency(totalValue)}</p>
+                    <p className="text-[10px] text-slate-400 mt-1">Converted to USD</p>
                   </Card>
 
-                  <Card className="p-6 rounded-2xl">
-                    <div className="flex items-center justify-between mb-4">
+                  <Card className="p-4 rounded-xl">
+                    <div className="flex items-center justify-between mb-3">
                       <div className={cn(
-                        "w-10 h-10 rounded-xl flex items-center justify-center",
+                        "w-8 h-8 rounded-lg flex items-center justify-center",
                         totalGainLoss >= 0 ? "bg-emerald-50 dark:bg-emerald-900/20" : "bg-rose-50 dark:bg-rose-900/20"
                       )}>
                         <ArrowUpRight className={cn(
-                          "w-5 h-5",
+                          "w-4 h-4",
                           totalGainLoss >= 0 ? "text-emerald-600 dark:text-emerald-400" : "text-rose-600 dark:text-rose-400"
                         )} />
                       </div>
                       <span className={cn(
-                        "text-xs font-bold px-2 py-1 rounded-lg",
+                        "text-[10px] font-bold px-1.5 py-0.5 rounded",
                         totalGainLoss >= 0 ? "text-emerald-600 bg-emerald-50 dark:bg-emerald-900/20" : "text-rose-600 bg-rose-50 dark:bg-rose-900/20"
                       )}>
                         {totalGainLoss >= 0 ? '+' : ''}{totalGainLossPercent.toFixed(2)}%
                       </span>
                     </div>
-                    <CardTitle className="text-sm font-medium text-slate-500 dark:text-slate-400 uppercase tracking-wider">Total Profit/Loss</CardTitle>
-                    <CardContent className={cn(
-                      "text-3xl font-bold mt-1 p-0",
+                    <p className="text-[11px] font-medium text-slate-500 dark:text-slate-400 uppercase tracking-wide">Total Profit/Loss</p>
+                    <p className={cn(
+                      "text-2xl font-bold mt-1",
                       totalGainLoss >= 0 ? "text-emerald-600 dark:text-emerald-400" : "text-rose-600 dark:text-rose-400"
                     )}>
                       {totalGainLoss >= 0 ? '+' : ''}{formatCurrency(totalGainLoss)}
-                    </CardContent>
-                    <CardDescription className="text-xs text-slate-400 mt-2">Cost: {formatCurrency(totalCost)}</CardDescription>
+                    </p>
+                    <p className="text-[10px] text-slate-400 mt-1">Cost: {formatCurrency(totalCost)}</p>
                   </Card>
 
-                  <Card className="p-6 rounded-2xl">
-                    <div className="flex items-center justify-between mb-4">
-                      <div className="w-10 h-10 bg-indigo-50 dark:bg-indigo-900/20 rounded-xl flex items-center justify-center">
-                        <RefreshCw className="text-indigo-600 dark:text-indigo-400 w-5 h-5" />
+                  <Card className="p-4 rounded-xl">
+                    <div className="flex items-center justify-between mb-3">
+                      <div className="w-8 h-8 bg-indigo-50 dark:bg-indigo-900/20 rounded-lg flex items-center justify-center">
+                        <RefreshCw className="text-indigo-600 dark:text-indigo-400 w-4 h-4" />
                       </div>
                     </div>
-                    <CardTitle className="text-sm font-medium text-slate-500 dark:text-slate-400 uppercase tracking-wider">Monthly Dividend</CardTitle>
-                    <CardContent className="text-3xl font-bold text-slate-900 dark:text-white mt-1 p-0">{formatCurrency(monthlyDividends)}</CardContent>
-                    <CardDescription className="text-xs text-slate-400 mt-2">{formatCurrency(annualDividends)} / year</CardDescription>
+                    <p className="text-[11px] font-medium text-slate-500 dark:text-slate-400 uppercase tracking-wide">Monthly Dividend</p>
+                    <p className="text-2xl font-bold text-slate-900 dark:text-white mt-1">{formatCurrency(monthlyDividends)}</p>
+                    <p className="text-[10px] text-slate-400 mt-1">{formatCurrency(annualDividends)} / year</p>
                   </Card>
 
-                  <Card className="p-6 rounded-2xl">
-                    <div className="flex items-center justify-between mb-4">
-                      <div className="w-10 h-10 bg-purple-50 dark:bg-purple-900/20 rounded-xl flex items-center justify-center">
-                        <Target className="text-purple-600 dark:text-purple-400 w-5 h-5" />
+                  <Card className="p-4 rounded-xl">
+                    <div className="flex items-center justify-between mb-3">
+                      <div className="w-8 h-8 bg-purple-50 dark:bg-purple-900/20 rounded-lg flex items-center justify-center">
+                        <Target className="text-purple-600 dark:text-purple-400 w-4 h-4" />
                       </div>
-                      <span className="text-xs font-bold text-purple-600 bg-purple-50 dark:bg-purple-900/20 px-2 py-1 rounded-lg">
+                      <span className="text-[10px] font-bold text-purple-600 bg-purple-50 dark:bg-purple-900/20 px-1.5 py-0.5 rounded">
                         {goalProgress.toFixed(1)}%
                       </span>
                     </div>
-                    <CardTitle className="text-sm font-medium text-slate-500 dark:text-slate-400 uppercase tracking-wider">Passive Income Goal</CardTitle>
-                    <CardContent className="text-3xl font-bold text-slate-900 dark:text-white mt-1 p-0">{formatCurrency(monthlyGoal)}</CardContent>
-                    <div className="mt-4 w-full bg-slate-100 dark:bg-slate-800 rounded-full h-1.5 overflow-hidden">
+                    <p className="text-[11px] font-medium text-slate-500 dark:text-slate-400 uppercase tracking-wide">Passive Income Goal</p>
+                    <p className="text-2xl font-bold text-slate-900 dark:text-white mt-1">{formatCurrency(monthlyGoal)}</p>
+                    <div className="mt-3 w-full bg-slate-100 dark:bg-slate-800 rounded-full h-1 overflow-hidden">
                       <div 
                         className="bg-purple-600 h-full transition-all duration-1000" 
                         style={{ width: `${Math.min(goalProgress, 100)}%` }}
@@ -1511,26 +1511,24 @@ function Dashboard({ view, portfolios, setView }: { view: 'dashboard' | 'assets'
                 </div>
 
                 {/* Allocation & Treemap */}
-                <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
-                  <div className="lg:col-span-1 space-y-6">
-                    <Card className="p-6 rounded-2xl h-full">
-                      <CardHeader className="p-0 mb-6">
-                        <div className="flex items-center gap-2">
-                          <PieChart className="w-5 h-5 text-indigo-600" />
-                          <CardTitle className="font-bold text-slate-900 dark:text-white">Asset Allocation</CardTitle>
-                        </div>
-                      </CardHeader>
-                      <CardContent className="space-y-4 p-0">
+                <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
+                  <div className="lg:col-span-1 space-y-4">
+                    <Card className="p-4 rounded-xl h-full">
+                      <div className="flex items-center gap-2 mb-4">
+                        <PieChart className="w-4 h-4 text-indigo-600" />
+                        <h3 className="font-bold text-sm text-slate-900 dark:text-white">Asset Allocation</h3>
+                      </div>
+                      <div className="space-y-3">
                         {allocationData.map((item) => (
-                          <div key={item.name} className="space-y-2">
-                            <div className="flex justify-between items-center text-sm">
+                          <div key={item.name} className="space-y-1.5">
+                            <div className="flex justify-between items-center text-xs">
                               <span className="font-medium text-slate-600 dark:text-slate-400 flex items-center gap-2">
                                 <div className="w-2 h-2 rounded-full" style={{ backgroundColor: item.color }} />
                                 {item.name}
                               </span>
                               <span className="font-bold text-slate-900 dark:text-white">{item.percentage.toFixed(1)}%</span>
                             </div>
-                            <div className="w-full bg-slate-100 dark:bg-slate-800 rounded-full h-1.5 overflow-hidden">
+                            <div className="w-full bg-slate-100 dark:bg-slate-800 rounded-full h-1 overflow-hidden">
                               <div 
                                 className="h-full transition-all duration-1000" 
                                 style={{ width: `${item.percentage}%`, backgroundColor: item.color }}
@@ -1542,11 +1540,11 @@ function Dashboard({ view, portfolios, setView }: { view: 'dashboard' | 'assets'
                           </div>
                         ))}
                         {allocationData.length === 0 && (
-                          <div className="h-40 flex items-center justify-center text-slate-400 italic text-sm">
+                          <div className="h-32 flex items-center justify-center text-slate-400 italic text-xs">
                             No data available
                           </div>
                         )}
-                      </CardContent>
+                      </div>
                     </Card>
                   </div>
                   <div className="lg:col-span-2">
@@ -1555,81 +1553,81 @@ function Dashboard({ view, portfolios, setView }: { view: 'dashboard' | 'assets'
                 </div>
               </>
             ) : (
-              /* Assets Table View */
-              <Card className="rounded-2xl overflow-hidden">
-                <CardHeader className="px-6 py-5 border-b border-slate-100 dark:border-slate-800 flex flex-col sm:flex-row sm:items-center justify-between gap-4 bg-slate-50/50 dark:bg-slate-800/50">
+/* Assets Table View */
+              <Card className="rounded-xl overflow-hidden">
+                <div className="px-4 py-3 border-b border-slate-100 dark:border-slate-800 flex flex-col sm:flex-row sm:items-center justify-between gap-3 bg-slate-50/50 dark:bg-slate-800/50">
                   <div className="flex items-center gap-2">
                     <Layers className="w-4 h-4 text-indigo-600" />
-                    <CardTitle className="font-bold text-slate-900 dark:text-white">Detailed Holdings</CardTitle>
+                    <h3 className="font-bold text-sm text-slate-900 dark:text-white">Detailed Holdings</h3>
                   </div>
                   
-                  <div className="flex items-center gap-3">
+                  <div className="flex items-center gap-2">
                     <button 
                       onClick={handleRefreshPrices}
                       disabled={isRefreshingPrices || assets.length === 0}
                       className={cn(
-                        "p-2 rounded-xl transition-all border flex items-center gap-2",
+                        "p-1.5 rounded-lg transition-all border flex items-center gap-1.5",
                         isRefreshingPrices 
                           ? "bg-indigo-50 dark:bg-indigo-900/20 text-indigo-400 border-indigo-100 dark:border-indigo-900/30" 
                           : "text-indigo-600 hover:bg-indigo-50 dark:hover:bg-indigo-900/20 border-indigo-100 dark:border-indigo-900/30"
                       )}
                       title="Refresh all prices"
                     >
-                      <RefreshCw className={cn("w-5 h-5", isRefreshingPrices && "animate-spin")} />
-                      {isRefreshingPrices && <span className="text-xs font-medium hidden sm:inline">Updating...</span>}
+                      <RefreshCw className={cn("w-4 h-4", isRefreshingPrices && "animate-spin")} />
+                      {isRefreshingPrices && <span className="text-[10px] font-medium hidden sm:inline">Updating...</span>}
                     </button>
                     <div className="relative flex-1 sm:flex-none">
                       <input 
                         type="text"
-                        placeholder="Search assets..."
+                        placeholder="Search..."
                         value={searchQuery}
                         onChange={(e) => setSearchQuery(e.target.value)}
-                        className="w-full sm:w-64 pl-4 pr-4 py-2 bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-xl text-sm focus:ring-2 focus:ring-indigo-500 outline-none transition-all"
+                        className="w-full sm:w-48 pl-3 pr-3 py-1.5 bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-lg text-xs focus:ring-2 focus:ring-indigo-500 outline-none transition-all"
                       />
                     </div>
                     <button 
                       onClick={() => setIsAddAssetOpen(true)}
                       disabled={selectedPortfolioId === 'all'}
-                      className="bg-indigo-600 text-white px-4 py-2 rounded-xl text-sm font-bold hover:bg-indigo-700 transition-all flex items-center gap-2 disabled:opacity-50 disabled:cursor-not-allowed"
+                      className="bg-indigo-600 text-white px-3 py-1.5 rounded-lg text-xs font-bold hover:bg-indigo-700 transition-all flex items-center gap-1 disabled:opacity-50 disabled:cursor-not-allowed"
                       title={selectedPortfolioId === 'all' ? "Select a specific portfolio to add assets" : "Add Asset"}
                     >
-                      <Plus className="w-4 h-4" />
+                      <Plus className="w-3.5 h-3.5" />
                       Add
                     </button>
                     <button 
                       onClick={() => setIsCSVImportOpen(true)}
                       disabled={selectedPortfolioId === 'all'}
-                      className="p-2 text-slate-500 dark:text-slate-400 hover:bg-slate-100 dark:hover:bg-slate-800 rounded-xl transition-colors border border-slate-200 dark:border-slate-800 disabled:opacity-50 disabled:cursor-not-allowed"
+                      className="p-1.5 text-slate-500 dark:text-slate-400 hover:bg-slate-100 dark:hover:bg-slate-800 rounded-lg transition-colors border border-slate-200 dark:border-slate-800 disabled:opacity-50 disabled:cursor-not-allowed"
                       title={selectedPortfolioId === 'all' ? "Select a specific portfolio to import assets" : "Import CSV"}
                     >
-                      <FileUp className="w-5 h-5" />
+                      <FileUp className="w-4 h-4" />
                     </button>
                     {assets.length > 0 && (
                       <button 
                         onClick={() => setIsDeleteAllOpen(true)}
                         disabled={selectedPortfolioId === 'all'}
-                        className="p-2 text-rose-500 hover:bg-rose-50 dark:hover:bg-rose-900/20 rounded-xl transition-colors border border-rose-100 dark:border-rose-900/30 disabled:opacity-50 disabled:cursor-not-allowed"
+                        className="p-1.5 text-rose-500 hover:bg-rose-50 dark:hover:bg-rose-900/20 rounded-lg transition-colors border border-rose-100 dark:border-rose-900/30 disabled:opacity-50 disabled:cursor-not-allowed"
                         title={selectedPortfolioId === 'all' ? "Select a specific portfolio to delete all assets" : "Delete All Assets"}
                       >
-                        <Trash2 className="w-5 h-5" />
+                        <Trash2 className="w-4 h-4" />
                       </button>
                     )}
                   </div>
-                </CardHeader>
+                </div>
                 <CardContent className="p-0 overflow-x-auto">
                   <table className="w-full text-left border-collapse">
                     <thead>
-                      <tr className="text-xs font-bold text-slate-400 dark:text-slate-500 uppercase tracking-wider border-b border-slate-100 dark:border-slate-800">
-                        <th className="px-6 py-4">Asset</th>
-                        <th className="px-6 py-4">Type</th>
-                        <th className="px-6 py-4">Div. Yield</th>
-                        <th className="px-6 py-4">5Y Growth</th>
-                        <th className="px-6 py-4">10Y Growth</th>
-                        <th className="px-6 py-4">Quantity</th>
-                        <th className="px-6 py-4">Purchase Price</th>
-                        <th className="px-6 py-4">Current Value</th>
-                        <th className="px-6 py-4">Gain/Loss</th>
-                        <th className="px-6 py-4 text-right">Actions</th>
+                      <tr className="text-[10px] font-bold text-slate-400 dark:text-slate-500 uppercase tracking-wider border-b border-slate-100 dark:border-slate-800">
+                        <th className="px-4 py-3">Asset</th>
+                        <th className="px-4 py-3">Type</th>
+                        <th className="px-4 py-3">Div. Yield</th>
+                        <th className="px-4 py-3">5Y Growth</th>
+                        <th className="px-4 py-3">10Y Growth</th>
+                        <th className="px-4 py-3">Quantity</th>
+                        <th className="px-4 py-3">Purchase Price</th>
+                        <th className="px-4 py-3">Current Value</th>
+                        <th className="px-4 py-3">Gain/Loss</th>
+                        <th className="px-4 py-3 text-right">Actions</th>
                       </tr>
                     </thead>
                     <tbody className="divide-y divide-slate-50 dark:divide-slate-800">
@@ -1651,21 +1649,21 @@ function Dashboard({ view, portfolios, setView }: { view: 'dashboard' | 'assets'
 
                         return (
                           <tr key={asset.id} className="hover:bg-slate-50/50 dark:hover:bg-slate-800/50 transition-colors group">
-                            <td className="px-6 py-4">
-                              <div className="flex items-center gap-3">
+                            <td className="px-4 py-3">
+                              <div className="flex items-center gap-2">
                                 <div className="flex flex-col">
-                                  <span className="font-bold text-slate-900 dark:text-white">{asset.symbol}</span>
-                                  <span className="text-xs text-slate-500 dark:text-slate-400">{asset.name}</span>
+                                  <span className="font-bold text-xs text-slate-900 dark:text-white">{asset.symbol}</span>
+                                  <span className="text-[10px] text-slate-500 dark:text-slate-400">{asset.name}</span>
                                 </div>
                                 <div className="hidden md:block">
                                   <Sparkline symbol={asset.symbol} type={asset.type} />
                                 </div>
                               </div>
                             </td>
-                            <td className="px-6 py-4">
-                              <div className="flex flex-col gap-1">
+                            <td className="px-4 py-3">
+                              <div className="flex flex-col gap-0.5">
                                 <span className={cn(
-                                  "inline-flex items-center px-2.5 py-1 rounded-lg text-[10px] font-bold uppercase tracking-wider w-fit",
+                                  "inline-flex items-center px-2 py-0.5 rounded text-[10px] font-bold uppercase tracking-wider w-fit",
                                   asset.type === 'Stock' ? "bg-indigo-50 dark:bg-indigo-900/30 text-indigo-600 dark:text-indigo-400" :
                                   asset.type === 'Crypto' ? "bg-amber-50 dark:bg-amber-900/30 text-amber-600 dark:text-amber-400" :
                                   asset.type === 'Commodity' ? "bg-emerald-50 dark:bg-emerald-900/30 text-emerald-600 dark:text-emerald-400" :
@@ -1676,57 +1674,57 @@ function Dashboard({ view, portfolios, setView }: { view: 'dashboard' | 'assets'
                                   {asset.type === 'GovernmentContribution' ? 'Devlet Katkısı' : asset.type}
                                 </span>
                                 {asset.type === 'GovernmentContribution' && (
-                                  <span className="text-[10px] font-bold text-rose-600 dark:text-rose-400 mt-1">
+                                  <span className="text-[10px] font-bold text-rose-600 dark:text-rose-400">
                                     Vested: {getAssetVestingPercent(asset)}%
                                   </span>
                                 )}
                                 {(asset.type === 'Fund' || asset.type === 'GovernmentContribution') && (asset.tefasType || asset.type === 'GovernmentContribution') && (
-                                  <span className="text-[9px] font-bold text-slate-400 dark:text-slate-500 ml-1">
+                                  <span className="text-[9px] font-bold text-slate-400 dark:text-slate-500">
                                     ({(asset.type === 'GovernmentContribution' || asset.tefasType === 'EMK') ? 'Emeklilik' : asset.tefasType === 'YAT' ? 'Yatırım' : 'BYF'})
                                   </span>
                                 )}
                               </div>
                             </td>
-                            <td className="px-6 py-4">
+                            <td className="px-4 py-3">
                               {asset.dividendYield ? (
-                                <span className="text-sm font-bold text-indigo-600 dark:text-indigo-400 bg-indigo-50 dark:bg-indigo-900/20 px-2 py-1 rounded-lg">
+                                <span className="text-xs font-bold text-indigo-600 dark:text-indigo-400 bg-indigo-50 dark:bg-indigo-900/20 px-1.5 py-0.5 rounded">
                                   {(asset.dividendYield * 100).toFixed(2)}%
                                 </span>
                               ) : (
-                                <span className="text-slate-400 text-xs">-</span>
+                                <span className="text-slate-400 text-[10px]">-</span>
                               )}
                             </td>
-                            <td className="px-6 py-4">
+                            <td className="px-4 py-3">
                               {asset.dividendGrowth5Y ? (
                                 <span className={cn(
-                                  "text-xs font-bold",
+                                  "text-[10px] font-bold",
                                   asset.dividendGrowth5Y > 0 ? "text-emerald-600 dark:text-emerald-400" : "text-rose-600 dark:text-rose-400"
                                 )}>
                                   {asset.dividendGrowth5Y > 0 ? '+' : ''}{(asset.dividendGrowth5Y * 100).toFixed(2)}%
                                 </span>
                               ) : (
-                                <span className="text-slate-400 text-xs">-</span>
+                                <span className="text-slate-400 text-[10px]">-</span>
                               )}
                             </td>
-                            <td className="px-6 py-4">
+                            <td className="px-4 py-3">
                               {asset.dividendGrowth10Y ? (
                                 <span className={cn(
-                                  "text-xs font-bold",
+                                  "text-[10px] font-bold",
                                   asset.dividendGrowth10Y > 0 ? "text-emerald-600 dark:text-emerald-400" : "text-rose-600 dark:text-rose-400"
                                 )}>
                                   {asset.dividendGrowth10Y > 0 ? '+' : ''}{(asset.dividendGrowth10Y * 100).toFixed(2)}%
                                 </span>
                               ) : (
-                                <span className="text-slate-400 text-xs">-</span>
+                                <span className="text-slate-400 text-[10px]">-</span>
                               )}
                             </td>
-                            <td className="px-6 py-4 font-medium text-slate-700 dark:text-slate-300">
+                            <td className="px-4 py-3 font-medium text-xs text-slate-700 dark:text-slate-300">
                               {formatNumber(asset.quantity)}
                             </td>
-                            <td className="px-6 py-4 text-slate-600 dark:text-slate-400">
+                            <td className="px-4 py-3 text-xs text-slate-600 dark:text-slate-400">
                               {formatCurrency(asset.purchasePrice, 'USD')}
                             </td>
-                            <td className="px-6 py-4 font-bold text-slate-900 dark:text-white">
+                            <td className="px-4 py-3 font-bold text-xs text-slate-900 dark:text-white">
                               <div className="flex flex-col">
                                 <span>{formatCurrency(currentValue)}</span>
                                 {asset.currentPrice && (
@@ -1736,11 +1734,11 @@ function Dashboard({ view, portfolios, setView }: { view: 'dashboard' | 'assets'
                                 )}
                               </div>
                             </td>
-                            <td className="px-6 py-4">
+                            <td className="px-4 py-3">
                               {asset.currentPrice ? (
                                 <div className="flex flex-col">
                                   <span className={cn(
-                                    "font-bold",
+                                    "font-bold text-xs",
                                     gainLoss >= 0 ? "text-emerald-600 dark:text-emerald-400" : "text-rose-600 dark:text-rose-400"
                                   )}>
                                     {gainLoss >= 0 ? '+' : ''}{formatCurrency(gainLoss)}
@@ -1753,27 +1751,27 @@ function Dashboard({ view, portfolios, setView }: { view: 'dashboard' | 'assets'
                                   </span>
                                 </div>
                               ) : (
-                                <span className="text-slate-400 text-xs italic">Awaiting price...</span>
+                                <span className="text-slate-400 text-[10px] italic">Awaiting...</span>
                               )}
                             </td>
-                            <td className="px-6 py-4 text-right">
+                            <td className="px-4 py-3 text-right">
                               <div className="flex items-center justify-end gap-1 opacity-0 group-hover:opacity-100 transition-opacity">
                                 <button 
                                   onClick={() => {
                                     setEditingAsset(asset);
                                     setIsEditAssetOpen(true);
                                   }}
-                                  className="p-2 text-slate-300 dark:text-slate-600 hover:text-indigo-600 dark:hover:text-indigo-400 transition-colors"
+                                  className="p-1.5 text-slate-300 dark:text-slate-600 hover:text-indigo-600 dark:hover:text-indigo-400 transition-colors"
                                   title="Edit asset"
                                 >
-                                  <Pencil className="w-4 h-4" />
+                                  <Pencil className="w-3.5 h-3.5" />
                                 </button>
                                 <button 
                                   onClick={() => handleDeleteAsset(asset.id)}
-                                  className="p-2 text-slate-300 dark:text-slate-600 hover:text-rose-600 dark:hover:text-rose-400 transition-colors"
+                                  className="p-1.5 text-slate-300 dark:text-slate-600 hover:text-rose-600 dark:hover:text-rose-400 transition-colors"
                                   title="Delete asset"
                                 >
-                                  <Trash2 className="w-4 h-4" />
+                                  <Trash2 className="w-3.5 h-3.5" />
                                 </button>
                               </div>
                             </td>
@@ -1782,8 +1780,8 @@ function Dashboard({ view, portfolios, setView }: { view: 'dashboard' | 'assets'
                       })}
                       {filteredAssets.length === 0 && (
                         <tr>
-                          <td colSpan={8} className="px-6 py-12 text-center text-slate-400 dark:text-slate-500 italic">
-                            {searchQuery ? "No assets match your search." : "No assets in this portfolio. Click \"Add Asset\" to get started."}
+                          <td colSpan={10} className="px-4 py-8 text-center text-slate-400 dark:text-slate-500 italic text-xs">
+                            {searchQuery ? "No assets match your search." : "No assets. Click \"Add\" to get started."}
                           </td>
                         </tr>
                       )}
@@ -1794,17 +1792,17 @@ function Dashboard({ view, portfolios, setView }: { view: 'dashboard' | 'assets'
             )}
           </>
         ) : (
-          <Card className="h-96 flex flex-col items-center justify-center text-center rounded-2xl border border-dashed border-slate-300 dark:border-slate-800 p-8">
-            <div className="w-20 h-20 bg-slate-50 dark:bg-slate-800 rounded-3xl flex items-center justify-center mb-6">
-              <Wallet className="text-slate-300 dark:text-slate-600 w-10 h-10" />
+          <Card className="h-72 flex flex-col items-center justify-center text-center rounded-xl border border-dashed border-slate-300 dark:border-slate-800 p-6">
+            <div className="w-16 h-16 bg-slate-50 dark:bg-slate-800 rounded-2xl flex items-center justify-center mb-4">
+              <Wallet className="text-slate-300 dark:text-slate-600 w-8 h-8" />
             </div>
-            <CardTitle className="text-2xl font-bold text-slate-900 dark:text-white">Start Your Journey</CardTitle>
-            <CardDescription className="mt-2 max-w-sm mx-auto">
+            <h2 className="text-lg font-bold text-slate-900 dark:text-white">Start Your Journey</h2>
+            <p className="text-xs text-slate-500 dark:text-slate-400 mt-1 max-w-sm mx-auto">
               Create your first portfolio to start tracking your investments in USD with real-time price data.
-            </CardDescription>
+            </p>
             <button 
               onClick={() => setView('settings')}
-              className="mt-8 bg-indigo-600 text-white px-8 py-3 rounded-2xl font-bold hover:bg-indigo-700 transition-all shadow-xl shadow-indigo-100 dark:shadow-none"
+              className="mt-6 bg-indigo-600 text-white px-6 py-2 rounded-xl text-sm font-bold hover:bg-indigo-700 transition-all shadow-lg shadow-indigo-100 dark:shadow-none"
             >
               Go to Settings to Create Portfolio
             </button>
