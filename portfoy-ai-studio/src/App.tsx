@@ -1427,41 +1427,7 @@ return (
                   </Card>
                 </div>
 
-{/* Allocation & Treemap */}
-                <div className="grid grid-cols-1 lg:grid-cols-3 gap-4">
-                  <div className="lg:col-span-1">
-                    <Card className="p-3 rounded-xl h-full">
-                      <p className="text-[11px] font-medium text-slate-500 dark:text-slate-400 mb-3">Asset Allocation</p>
-                      <div className="space-y-2">
-                        {allocationData.map((item) => (
-                          <div key={item.name}>
-                            <div className="flex justify-between items-center text-[11px]">
-                              <span className="font-medium text-slate-600 dark:text-slate-400 flex items-center gap-1.5">
-                                <div className="w-2 h-2 rounded-full" style={{ backgroundColor: item.color }} />
-                                {item.name}
-                              </span>
-                              <span className="font-bold text-slate-900 dark:text-white">{item.percentage.toFixed(1)}%</span>
-                            </div>
-                            <div className="w-full bg-slate-100 dark:bg-slate-800 rounded-full h-1 overflow-hidden mt-0.5">
-                              <div 
-                                className="h-full transition-all duration-1000" 
-                                style={{ width: `${item.percentage}%`, backgroundColor: item.color }}
-                              />
-                            </div>
-                          </div>
-                        ))}
-                        {allocationData.length === 0 && (
-                          <div className="h-32 flex items-center justify-center text-slate-400 italic text-xs">
-                            No data available
-                          </div>
-                        )}
-                      </div>
-                    </Card>
-                  </div>
-                  <div className="lg:col-span-2">
-                    <Treemap data={treemapData} />
-                  </div>
-                </div>
+<Treemap data={treemapData} />
               </>
             ) : (
 /* Assets Table View */
