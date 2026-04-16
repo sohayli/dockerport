@@ -139,7 +139,7 @@ export function PassiveIncomeView({ portfolios }: PassiveIncomeViewProps) {
       {/* Header */}
       <div className="flex flex-col md:flex-row md:items-center justify-between gap-6">
         <div className="flex items-center gap-4">
-          <div className="w-12 h-12 bg-indigo-600 rounded-2xl flex items-center justify-center shadow-lg shadow-indigo-200 dark:shadow-none">
+          <div className="w-12 h-12 bg-blue-600 rounded-2xl flex items-center justify-center shadow-lg shadow-blue-200 dark:shadow-none">
             <TrendingUp className="text-white w-6 h-6" />
           </div>
           <div>
@@ -156,7 +156,7 @@ export function PassiveIncomeView({ portfolios }: PassiveIncomeViewProps) {
               className={cn(
                 "px-4 py-1.5 rounded-lg text-xs font-bold transition-all",
                 projectionYears === y 
-                  ? "bg-indigo-600 text-white shadow-md" 
+                  ? "bg-blue-600 text-white shadow-md" 
                   : "text-slate-500 hover:bg-slate-50 dark:hover:bg-slate-800"
               )}
             >
@@ -201,22 +201,22 @@ export function PassiveIncomeView({ portfolios }: PassiveIncomeViewProps) {
           <p className="text-xs text-slate-400 mt-2">Ağırlıklı Ortalama (5Y/10Y)</p>
         </Card>
 
-        <Card className="p-6 border-gray-200 dark:border-gray-700 bg-indigo-50/10">
+        <Card className="p-6 border-gray-200 dark:border-gray-700 bg-blue-50/10">
           <div className="flex items-center justify-between mb-4">
             <div className="flex items-center gap-3">
-              <div className="w-10 h-10 bg-indigo-100 dark:bg-indigo-900/40 rounded-xl flex items-center justify-center">
-                <Target className="text-indigo-600 dark:text-indigo-400 w-5 h-5" />
+              <div className="w-10 h-10 bg-blue-100 dark:bg-blue-900/40 rounded-xl flex items-center justify-center">
+                <Target className="text-blue-600 dark:text-blue-400 w-5 h-5" />
               </div>
-              <span className="text-xs font-bold text-indigo-600 dark:text-indigo-400 uppercase tracking-wider">Özgürlük Oranı</span>
+              <span className="text-xs font-bold text-blue-600 dark:text-blue-400 uppercase tracking-wider">Özgürlük Oranı</span>
             </div>
-            <span className="text-xs font-bold text-indigo-600 bg-indigo-100 dark:bg-indigo-900/40 px-2 py-1 rounded-lg">
+            <span className="text-xs font-bold text-blue-600 bg-blue-100 dark:bg-blue-900/40 px-2 py-1 rounded-lg">
               %{stats.progress.toFixed(1)}
             </span>
           </div>
           <h3 className="text-3xl font-bold text-slate-900 dark:text-white">{formatCurrency(stats.totalGoal)}</h3>
           <div className="mt-4 w-full bg-slate-100 dark:bg-slate-800 rounded-full h-1.5 overflow-hidden">
             <div 
-              className="bg-indigo-600 h-full transition-all duration-1000" 
+              className="bg-blue-600 h-full transition-all duration-1000" 
               style={{ width: `${Math.min(stats.progress, 100)}%` }}
             />
           </div>
@@ -228,14 +228,14 @@ export function PassiveIncomeView({ portfolios }: PassiveIncomeViewProps) {
         <Card className="lg:col-span-2 p-6 border-slate-100 dark:border-slate-800">
           <div className="flex items-center justify-between mb-8">
             <div className="flex items-center gap-2">
-              <LineChartIcon className="w-5 h-5 text-indigo-600" />
+                <LineChartIcon className="w-5 h-5 text-blue-600" />
               <h3 className="font-bold text-slate-900 dark:text-white">Gelir Projeksiyonu</h3>
             </div>
             <div className="flex items-center gap-4">
-              <div className="flex items-center gap-2">
-                <div className="w-3 h-3 rounded-full bg-indigo-600" />
-                <span className="text-xs text-slate-500">Aylık Gelir</span>
-              </div>
+                <div className="flex items-center gap-2">
+                  <div className="w-3 h-3 rounded-full bg-blue-600" />
+                  <span className="text-xs text-slate-500">Aylık Gelir</span>
+                </div>
               <div className="flex items-center gap-4 ml-4">
                 <label className="text-xs text-slate-400">Yeniden Yatırım: %{reinvestRate}</label>
                 <input 
@@ -244,7 +244,7 @@ export function PassiveIncomeView({ portfolios }: PassiveIncomeViewProps) {
                   max="100" 
                   value={reinvestRate} 
                   onChange={(e) => setReinvestRate(parseInt(e.target.value))}
-                  className="w-24 h-1.5 bg-slate-100 dark:bg-slate-800 rounded-full appearance-none cursor-pointer accent-indigo-600"
+                  className="w-24 h-1.5 bg-slate-100 dark:bg-slate-800 rounded-full appearance-none cursor-pointer accent-blue-600"
                 />
               </div>
             </div>
@@ -255,8 +255,8 @@ export function PassiveIncomeView({ portfolios }: PassiveIncomeViewProps) {
               <AreaChart data={projectionData}>
                 <defs>
                   <linearGradient id="colorIncome" x1="0" y1="0" x2="0" y2="1">
-                    <stop offset="5%" stopColor="#4f46e5" stopOpacity={0.1}/>
-                    <stop offset="95%" stopColor="#4f46e5" stopOpacity={0}/>
+                    <stop offset="5%" stopColor="#2563eb" stopOpacity={0.1}/>
+                    <stop offset="95%" stopColor="#2563eb" stopOpacity={0}/>
                   </linearGradient>
                 </defs>
                 <CartesianGrid strokeDasharray="3 3" vertical={false} stroke="#e2e8f0" />
@@ -287,7 +287,7 @@ export function PassiveIncomeView({ portfolios }: PassiveIncomeViewProps) {
                 <Area 
                   type="monotone" 
                   dataKey="monthly" 
-                  stroke="#4f46e5" 
+                  stroke="#2563eb" 
                   strokeWidth={3}
                   fillOpacity={1} 
                   fill="url(#colorIncome)" 
@@ -300,7 +300,7 @@ export function PassiveIncomeView({ portfolios }: PassiveIncomeViewProps) {
         <div className="space-y-6">
           <Card className="p-6 border-slate-100 dark:border-slate-800 h-full">
             <h3 className="font-bold text-slate-900 dark:text-white mb-6 flex items-center gap-2">
-              <Briefcase className="w-5 h-5 text-indigo-600" />
+              <Briefcase className="w-5 h-5 text-blue-600" />
               En Yüksek Verimli Varlıklar
             </h3>
             <div className="space-y-4">
@@ -311,7 +311,7 @@ export function PassiveIncomeView({ portfolios }: PassiveIncomeViewProps) {
                 .map((asset) => (
                   <div key={asset.id} className="flex items-center justify-between p-3 bg-slate-50 dark:bg-slate-800/50 rounded-2xl border border-slate-100 dark:border-slate-800">
                     <div className="flex items-center gap-3">
-                      <div className="w-8 h-8 bg-white dark:bg-slate-900 rounded-lg flex items-center justify-center font-bold text-[10px] text-indigo-600 shadow-sm">
+                        <div className="w-8 h-8 bg-white dark:bg-slate-900 rounded-lg flex items-center justify-center font-bold text-[10px] text-blue-600 shadow-sm">
                         {asset.symbol.substring(0, 3)}
                       </div>
                       <div>
@@ -342,7 +342,7 @@ export function PassiveIncomeView({ portfolios }: PassiveIncomeViewProps) {
       <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
         <Card className="p-6 border-slate-100 dark:border-slate-800">
           <h3 className="font-bold text-slate-900 dark:text-white mb-4 flex items-center gap-2">
-            <Info className="w-5 h-5 text-indigo-600" />
+            <Info className="w-5 h-5 text-blue-600" />
             Finansal Özgürlük Analizi
           </h3>
           <div className="space-y-4 text-sm text-slate-600 dark:text-slate-400 leading-relaxed">
@@ -355,8 +355,8 @@ export function PassiveIncomeView({ portfolios }: PassiveIncomeViewProps) {
               Portföyünüzün ağırlıklı temettü büyüme oranı <strong>%{stats.weightedGrowth.toFixed(2)}</strong>. 
               Bu oran, şirketlerinizin her yıl temettülerini ne kadar artırdığını gösterir.
             </p>
-            <div className="p-4 bg-indigo-50 dark:bg-indigo-900/20 rounded-2xl border border-gray-200 dark:border-gray-700">
-              <p className="text-indigo-900 dark:text-indigo-300 font-medium">
+            <div className="p-4 bg-blue-50 dark:bg-blue-900/20 rounded-2xl border border-gray-200 dark:border-gray-700">
+              <p className="text-blue-900 dark:text-blue-300 font-medium">
                 İpucu: Temettü büyüme oranı enflasyonun üzerindeyse, alım gücünüz zamanla artacaktır.
               </p>
             </div>
@@ -365,7 +365,7 @@ export function PassiveIncomeView({ portfolios }: PassiveIncomeViewProps) {
 
         <Card className="p-6 border-slate-100 dark:border-slate-800">
           <h3 className="font-bold text-slate-900 dark:text-white mb-4 flex items-center gap-2">
-            <Calendar className="w-5 h-5 text-indigo-600" />
+            <Calendar className="w-5 h-5 text-blue-600" />
             Gelecek Tahmini
           </h3>
           <div className="space-y-4">
@@ -379,7 +379,7 @@ export function PassiveIncomeView({ portfolios }: PassiveIncomeViewProps) {
             </div>
             <div className="flex justify-between items-center p-3">
               <span className="text-sm text-slate-500">Hedefe Kalan Süre</span>
-              <span className="font-bold text-indigo-600">
+              <span className="font-bold text-blue-600">
                 {projectionData.find(d => d.monthly >= stats.totalGoal)?.year ?? '>30'} Yıl
               </span>
             </div>

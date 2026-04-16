@@ -147,9 +147,9 @@ export function GovernmentContributionView({ portfolios, onUpdatePortfolio }: Go
       </div>
 
       {/* Rules Info */}
-      <Card className="p-4 bg-indigo-50/50 dark:bg-indigo-900/10 border-gray-200 dark:border-gray-700 flex items-start gap-3">
-        <Info className="w-5 h-5 text-indigo-600 mt-0.5" />
-        <div className="text-sm text-indigo-900 dark:text-indigo-300">
+      <Card className="p-4 bg-blue-50/50 dark:bg-blue-900/10 border-gray-200 dark:border-gray-700 flex items-start gap-3">
+        <Info className="w-5 h-5 text-blue-600 mt-0.5" />
+        <div className="text-sm text-blue-900 dark:text-blue-300">
           <p className="font-bold mb-1">Hakediş Kuralları:</p>
           <div className="grid grid-cols-2 md:grid-cols-5 gap-4">
             <div><span className="font-bold">0-3 Yıl:</span> %0</div>
@@ -184,13 +184,13 @@ export function GovernmentContributionView({ portfolios, onUpdatePortfolio }: Go
                     <span className={cn(
                       "text-xl font-black",
                       p.vestingPercent === 100 ? "text-emerald-600" : 
-                      p.vestingPercent > 0 ? "text-indigo-600" : "text-slate-400"
+                      p.vestingPercent > 0 ? "text-blue-600" : "text-slate-400"
                     )}>
                       %{p.vestingPercent}
                     </span>
                     <div className="w-24 h-2 bg-slate-100 dark:bg-slate-800 rounded-full overflow-hidden">
                       <div 
-                        className="h-full bg-indigo-600 transition-all duration-1000" 
+                        className="h-full bg-blue-600 transition-all duration-1000" 
                         style={{ width: `${p.vestingPercent}%` }}
                       />
                     </div>
@@ -213,7 +213,7 @@ export function GovernmentContributionView({ portfolios, onUpdatePortfolio }: Go
                           type="date"
                           value={tempBirthDate}
                           onChange={(e) => setTempBirthDate(e.target.value)}
-                          className="px-2 py-1 text-xs border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-800 rounded-lg outline-none focus:ring-2 focus:ring-indigo-500"
+                          className="px-2 py-1 text-xs border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-800 rounded-lg outline-none focus:ring-2 focus:ring-blue-500"
                         />
                       </div>
                       <div className="flex flex-col gap-1">
@@ -222,7 +222,7 @@ export function GovernmentContributionView({ portfolios, onUpdatePortfolio }: Go
                           type="date"
                           value={tempBesEntryDate}
                           onChange={(e) => setTempBesEntryDate(e.target.value)}
-                          className="px-2 py-1 text-xs border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-800 rounded-lg outline-none focus:ring-2 focus:ring-indigo-500"
+                          className="px-2 py-1 text-xs border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-800 rounded-lg outline-none focus:ring-2 focus:ring-blue-500"
                         />
                       </div>
                       <button 

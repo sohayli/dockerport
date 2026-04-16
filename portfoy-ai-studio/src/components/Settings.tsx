@@ -24,7 +24,7 @@ import { EditPortfolioModal } from './modals/EditPortfolioModal';
 import { ThemeContext } from '../context';
 
 type ThemeGrayColor = 'gray' | 'slate';
-type ThemeAccentColor = 'gray' | 'blue' | 'indigo' | 'violet' | 'purple' | 'plum' | 'crimson' | 'red' | 'ruby' | 'green' | 'jade' | 'teal' | 'cyan' | 'amber' | 'yellow' | 'gold' | 'orange' | 'tomato';
+type ThemeAccentColor = 'gray' | 'blue' | 'violet' | 'purple' | 'plum' | 'crimson' | 'red' | 'ruby' | 'green' | 'jade' | 'teal' | 'cyan' | 'amber' | 'yellow' | 'gold' | 'orange' | 'tomato';
 
 interface SettingsProps {
   profile: UserProfile | null;
@@ -47,7 +47,6 @@ const grayColors: { value: ThemeGrayColor; label: string }[] = [
 const accentColors: { value: ThemeAccentColor; label: string }[] = [
   { value: 'gray', label: 'Gray' },
   { value: 'blue', label: 'Blue' },
-  { value: 'indigo', label: 'Indigo' },
   { value: 'violet', label: 'Violet' },
   { value: 'purple', label: 'Purple' },
   { value: 'plum', label: 'Plum' },
@@ -162,7 +161,7 @@ export function Settings({ profile, onUpdateProfile, portfolios, onAddPortfolio,
               <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                 <Card className="p-6 space-y-4">
                   <div className="flex items-center gap-2 mb-2">
-                    <UserIcon className="w-5 h-5 text-indigo-600" />
+                    <UserIcon className="w-5 h-5 text-blue-600" />
                     <h4 className="font-bold text-slate-900 dark:text-white">Personal Info</h4>
                   </div>
                   <div>
@@ -196,7 +195,7 @@ export function Settings({ profile, onUpdateProfile, portfolios, onAddPortfolio,
 
                 <Card className="p-6 space-y-4 border-slate-100 dark:border-slate-800 bg-slate-50/30 dark:bg-slate-900/5">
                   <div className="flex items-center gap-2 mb-2">
-                    <TrendingUp className="w-5 h-5 text-indigo-600" />
+                    <TrendingUp className="w-5 h-5 text-blue-600" />
                     <h4 className="font-bold text-slate-900 dark:text-white">BES (Devlet Katkısı) Bilgisi</h4>
                   </div>
                   <div className="p-4 bg-white dark:bg-slate-900 rounded-2xl border border-gray-200 dark:border-gray-700 space-y-2">
@@ -204,7 +203,7 @@ export function Settings({ profile, onUpdateProfile, portfolios, onAddPortfolio,
                       Devlet katkısı hakediş hesaplamaları artık her portföy için özel olarak yapılmaktadır. 
                       Portföy ayarlarından doğum tarihi ve sisteme giriş tarihini güncelleyebilirsiniz.
                     </p>
-                    <h5 className="text-xs font-bold text-indigo-600 uppercase tracking-wider mt-4">Vesting Rules (Hakediş)</h5>
+                    <h5 className="text-xs font-bold text-blue-600 uppercase tracking-wider mt-4">Vesting Rules (Hakediş)</h5>
                     <ul className="text-[11px] text-slate-500 dark:text-slate-400 space-y-1">
                       <li>• 0-3 years: 0%</li>
                       <li>• 3-6 years: 15%</li>

@@ -56,7 +56,7 @@ export function Navbar({ user, profile, currentView, setView }: NavbarProps) {
         <div className="flex justify-between h-16 items-center">
           <div className="flex items-center gap-8">
             <div className="flex items-center gap-2 cursor-pointer" onClick={() => handleNavClick('dashboard')}>
-              <div className="w-8 h-8 bg-indigo-600 rounded-lg flex items-center justify-center">
+              <div className="w-8 h-8 bg-blue-600 rounded-lg flex items-center justify-center">
                 <TrendingUp className="text-white w-5 h-5" />
               </div>
               <span className="text-xl font-bold text-slate-900 dark:text-white tracking-tight">FinTrack</span>
@@ -74,7 +74,7 @@ export function Navbar({ user, profile, currentView, setView }: NavbarProps) {
                         ? item.color === 'emerald' ? "bg-emerald-50 dark:bg-emerald-900/30 text-emerald-600 dark:text-emerald-400"
                         : item.color === 'rose' ? "bg-rose-50 dark:bg-rose-900/30 text-rose-600 dark:text-rose-400"
                         : item.color === 'purple' ? "bg-purple-50 dark:bg-purple-900/30 text-purple-600 dark:text-purple-400"
-                        : "bg-indigo-50 dark:bg-indigo-900/30 text-indigo-600 dark:text-indigo-400"
+                        : "bg-blue-50 dark:bg-blue-900/30 text-blue-600 dark:text-blue-400"
                         : "text-slate-500 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white"
                     )}
                   >
@@ -99,7 +99,7 @@ export function Navbar({ user, profile, currentView, setView }: NavbarProps) {
               <div className="flex items-center gap-2 md:gap-3">
                 <Avatar className="w-9 h-9">
                   <AvatarImage src={user.avatarUrl} alt={user.displayName || user.email} />
-                  <AvatarFallback className="bg-indigo-100 dark:bg-indigo-900/30 text-indigo-600 dark:text-indigo-400 text-sm font-bold">
+                  <AvatarFallback className="bg-blue-100 dark:bg-blue-900/30 text-blue-600 dark:text-blue-400 text-sm font-bold">
                     {user.displayName?.charAt(0).toUpperCase() || user.email?.charAt(0).toUpperCase()}
                   </AvatarFallback>
                 </Avatar>
@@ -126,7 +126,7 @@ export function Navbar({ user, profile, currentView, setView }: NavbarProps) {
             ) : (
               <button 
                 onClick={() => signInWithGoogle()}
-                className="bg-indigo-600 text-white px-4 py-2 rounded-lg text-sm font-medium hover:bg-indigo-700 transition-colors"
+                className="bg-blue-600 text-white px-4 py-2 rounded-lg text-sm font-medium hover:bg-blue-700 transition-colors"
               >
                 Sign In
               </button>
@@ -155,7 +155,7 @@ export function Navbar({ user, profile, currentView, setView }: NavbarProps) {
             >
               <div className="flex items-center justify-between mb-8">
                 <div className="flex items-center gap-2">
-                  <div className="w-8 h-8 bg-indigo-600 rounded-lg flex items-center justify-center">
+                  <div className="w-8 h-8 bg-blue-600 rounded-lg flex items-center justify-center">
                     <TrendingUp className="text-white w-5 h-5" />
                   </div>
                   <span className="text-xl font-bold text-slate-900 dark:text-white">FinTrack</span>
@@ -176,7 +176,7 @@ export function Navbar({ user, profile, currentView, setView }: NavbarProps) {
                         ? item.color === 'emerald' ? "bg-emerald-50 dark:bg-emerald-900/30 text-emerald-600 dark:text-emerald-400"
                         : item.color === 'rose' ? "bg-rose-50 dark:bg-rose-900/30 text-rose-600 dark:text-rose-400"
                         : item.color === 'purple' ? "bg-purple-50 dark:bg-purple-900/30 text-purple-600 dark:text-purple-400"
-                        : "bg-indigo-50 dark:bg-indigo-900/30 text-indigo-600 dark:text-indigo-400"
+                        : "bg-blue-50 dark:bg-blue-900/30 text-blue-600 dark:text-blue-400"
                         : "text-slate-500 dark:text-slate-400 hover:bg-slate-50 dark:hover:bg-slate-800"
                     )}
                   >
@@ -190,7 +190,7 @@ export function Navbar({ user, profile, currentView, setView }: NavbarProps) {
                 <div className="flex items-center gap-3 mb-6">
                   <Avatar className="w-10 h-10">
                     <AvatarImage src={user.avatarUrl} alt={user.displayName || user.email} />
-                    <AvatarFallback className="bg-indigo-100 dark:bg-indigo-900/30 text-indigo-600 dark:text-indigo-400">
+                    <AvatarFallback className="bg-blue-100 dark:bg-blue-900/30 text-blue-600 dark:text-blue-400">
                       {user.displayName?.charAt(0).toUpperCase() || user.email?.charAt(0).toUpperCase()}
                     </AvatarFallback>
                   </Avatar>

@@ -3,10 +3,9 @@ import * as d3 from 'd3';
 import Papa from 'papaparse';
 import React from 'react';
 import { AuthContext, ThemeContext } from './context';
-import { Theme as RadixTheme } from '@radix-ui/themes';
 
 type ThemeGrayColor = 'gray' | 'slate';
-type ThemeAccentColor = 'gray' | 'blue' | 'indigo' | 'violet' | 'purple' | 'plum' | 'crimson' | 'red' | 'ruby' | 'green' | 'jade' | 'teal' | 'cyan' | 'amber' | 'yellow' | 'gold' | 'orange' | 'tomato';
+type ThemeAccentColor = 'gray' | 'blue' | 'violet' | 'purple' | 'plum' | 'crimson' | 'red' | 'ruby' | 'green' | 'jade' | 'teal' | 'cyan' | 'amber' | 'yellow' | 'gold' | 'orange' | 'tomato';
 import { 
   getUser,
   createUser,
@@ -303,7 +302,7 @@ function CSVImportModal({ isOpen, onClose, onImport }: { isOpen: boolean; onClos
           <button 
             onClick={handleImport}
             disabled={!file || isProcessing}
-            className="flex-1 px-4 py-2 bg-indigo-600 text-white rounded-lg hover:bg-indigo-700 transition-colors disabled:opacity-50 flex items-center justify-center gap-2"
+            className="flex-1 px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors disabled:opacity-50 flex items-center justify-center gap-2"
           >
             {isProcessing ? (
               <div className="w-4 h-4 border-2 border-white border-t-transparent rounded-full animate-spin" />
@@ -591,7 +590,7 @@ function AddAssetModal({ isOpen, onClose, onAdd }: { isOpen: boolean; onClose: (
               handleClose();
             }}
             disabled={!symbol || !quantity || !price}
-            className="flex-1 px-4 py-2 bg-indigo-600 text-white rounded-lg hover:bg-indigo-700 transition-colors disabled:opacity-50"
+            className="flex-1 px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors disabled:opacity-50"
           >
             Add Asset
           </button>
@@ -830,7 +829,7 @@ function EditAssetModal({ isOpen, onClose, onEdit, asset }: { isOpen: boolean; o
               handleClose();
             }}
             disabled={!symbol || !quantity || !price}
-            className="flex-1 px-4 py-2 bg-indigo-600 text-white rounded-lg hover:bg-indigo-700 transition-colors disabled:opacity-50"
+            className="flex-1 px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors disabled:opacity-50"
           >
             Save Changes
           </button>
@@ -2143,18 +2142,11 @@ export default function App() {
   return (
     <AuthContext.Provider value={{ user, profile, loading }}>
       <ThemeContext.Provider value={{ isDark, toggleTheme, grayColor, accentColor, setColorScale }}>
-        <RadixTheme 
-          appearance={isDark ? 'dark' : 'light'} 
-          grayColor={grayColor}
-          accentColor={accentColor}
-          radius="medium"
-          scaling="100%"
-        >
-          <TooltipProvider>
-            <SidebarProvider>
-              <div className="min-h-screen bg-gray-100 dark:bg-gray-900 font-sans selection:bg-gray-300 dark:selection:bg-gray-700 selection:text-gray-900 dark:selection:text-gray-100 transition-colors flex w-full">
-              {user && <AppSidebar user={user} profile={profile} currentView={view} currentSettingsTab={settingsTab} setView={setView} setSettingsTab={setSettingsTab} />}
-              <main className="flex-1">
+        <TooltipProvider>
+          <SidebarProvider>
+            <div className="min-h-screen bg-gray-100 dark:bg-gray-900 font-sans selection:bg-gray-300 dark:selection:bg-gray-700 selection:text-gray-900 dark:selection:bg-gray-100 transition-colors flex w-full">
+            {user && <AppSidebar user={user} profile={profile} currentView={view} currentSettingsTab={settingsTab} setView={setView} setSettingsTab={setSettingsTab} />}
+            <main className="flex-1">
                 {user && (
                   <header className="flex h-14 shrink-0 items-center justify-between border-b border-slate-200 dark:border-slate-800 px-4">
                     <div className="flex items-center gap-3">
@@ -2244,8 +2236,7 @@ export default function App() {
               </main>
             </div>
           </SidebarProvider>
-          </TooltipProvider>
-        </RadixTheme>
+        </TooltipProvider>
       </ThemeContext.Provider>
     </AuthContext.Provider>
   );

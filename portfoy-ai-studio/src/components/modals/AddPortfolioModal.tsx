@@ -32,7 +32,7 @@ export function AddPortfolioModal({ isOpen, onClose, onAdd }: AddPortfolioModalP
               value={name}
               onChange={(e) => setName(e.target.value)}
               placeholder="e.g. Retirement"
-              className="w-full px-3 py-2 border border-slate-300 dark:border-slate-700 bg-white dark:bg-slate-800 text-slate-900 dark:text-white rounded-lg focus:ring-2 focus:ring-indigo-500 outline-none transition-colors"
+              className="w-full px-3 py-2 border border-slate-300 dark:border-slate-700 bg-white dark:bg-slate-800 text-slate-900 dark:text-white rounded-lg focus:ring-2 focus:ring-blue-500 outline-none transition-colors"
             />
           </div>
           <div className="grid grid-cols-2 gap-4">
@@ -42,7 +42,7 @@ export function AddPortfolioModal({ isOpen, onClose, onAdd }: AddPortfolioModalP
                 type="date" 
                 value={birthDate}
                 onChange={(e) => setBirthDate(e.target.value)}
-                className="w-full px-3 py-2 border border-slate-300 dark:border-slate-700 bg-white dark:bg-slate-800 text-slate-900 dark:text-white rounded-lg focus:ring-2 focus:ring-indigo-500 outline-none transition-colors"
+                className="w-full px-3 py-2 border border-slate-300 dark:border-slate-700 bg-white dark:bg-slate-800 text-slate-900 dark:text-white rounded-lg focus:ring-2 focus:ring-blue-500 outline-none transition-colors"
               />
             </div>
             <div>
@@ -51,7 +51,7 @@ export function AddPortfolioModal({ isOpen, onClose, onAdd }: AddPortfolioModalP
                 type="date" 
                 value={besEntryDate}
                 onChange={(e) => setBesEntryDate(e.target.value)}
-                className="w-full px-3 py-2 border border-slate-300 dark:border-slate-700 bg-white dark:bg-slate-800 text-slate-900 dark:text-white rounded-lg focus:ring-2 focus:ring-indigo-500 outline-none transition-colors"
+                className="w-full px-3 py-2 border border-slate-300 dark:border-slate-700 bg-white dark:bg-slate-800 text-slate-900 dark:text-white rounded-lg focus:ring-2 focus:ring-blue-500 outline-none transition-colors"
               />
             </div>
           </div>
@@ -62,7 +62,7 @@ export function AddPortfolioModal({ isOpen, onClose, onAdd }: AddPortfolioModalP
               value={goal}
               onChange={(e) => setGoal(e.target.value)}
               placeholder="e.g. 1000"
-              className="w-full px-3 py-2 border border-slate-300 dark:border-slate-700 bg-white dark:bg-slate-800 text-slate-900 dark:text-white rounded-lg focus:ring-2 focus:ring-indigo-500 outline-none transition-colors"
+              className="w-full px-3 py-2 border border-slate-300 dark:border-slate-700 bg-white dark:bg-slate-800 text-slate-900 dark:text-white rounded-lg focus:ring-2 focus:ring-blue-500 outline-none transition-colors"
             />
           </div>
           <div>
@@ -71,7 +71,7 @@ export function AddPortfolioModal({ isOpen, onClose, onAdd }: AddPortfolioModalP
               value={desc}
               onChange={(e) => setDesc(e.target.value)}
               placeholder="What is this portfolio for?"
-              className="w-full px-3 py-2 border border-slate-300 dark:border-slate-700 bg-white dark:bg-slate-800 text-slate-900 dark:text-white rounded-lg focus:ring-2 focus:ring-indigo-500 outline-none h-20 resize-none transition-colors"
+              className="w-full px-3 py-2 border border-slate-300 dark:border-slate-700 bg-white dark:bg-slate-800 text-slate-900 dark:text-white rounded-lg focus:ring-2 focus:ring-blue-500 outline-none h-20 resize-none transition-colors"
             />
           </div>
         </div>
@@ -93,7 +93,7 @@ export function AddPortfolioModal({ isOpen, onClose, onAdd }: AddPortfolioModalP
               onClose();
             }}
             disabled={!name.trim()}
-            className="flex-1 px-4 py-2 bg-indigo-600 text-white rounded-lg hover:bg-indigo-700 transition-colors disabled:opacity-50"
+            className="flex-1 px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors disabled:opacity-50"
           >
             Create
           </button>

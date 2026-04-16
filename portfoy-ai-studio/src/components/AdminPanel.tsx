@@ -193,7 +193,7 @@ export function AdminPanel({ user }: { user: any }) {
         <div className="flex items-center justify-between mb-8">
           <div>
             <h1 className="text-3xl font-bold text-slate-900 dark:text-white flex items-center gap-3">
-              <Shield className="w-8 h-8 text-indigo-600" />
+              <Shield className="w-8 h-8 text-blue-600" />
               Admin Panel
             </h1>
             <p className="text-slate-500 dark:text-slate-400 mt-1">
@@ -238,7 +238,7 @@ export function AdminPanel({ user }: { user: any }) {
             <Card>
               <CardContent className="pt-6">
                 <div className="flex items-center gap-3">
-                  <TrendingUp className="w-5 h-5 text-indigo-600" />
+                  <TrendingUp className="w-5 h-5 text-blue-600" />
                   <div>
                     <p className="text-2xl font-bold text-slate-900 dark:text-white">{stats.assets}</p>
                     <p className="text-xs text-slate-500">Assets</p>
@@ -266,7 +266,7 @@ export function AdminPanel({ user }: { user: any }) {
           <Card className="mb-8">
             <CardHeader>
               <CardTitle className="flex items-center gap-2">
-                <RefreshCw className="w-5 h-5 text-indigo-600" />
+                <RefreshCw className="w-5 h-5 text-blue-600" />
                 Superadmin Actions
               </CardTitle>
             </CardHeader>
@@ -307,14 +307,14 @@ export function AdminPanel({ user }: { user: any }) {
         <Card>
           <CardHeader>
             <CardTitle className="flex items-center gap-2">
-              <Users className="w-5 h-5 text-indigo-600" />
+              <Users className="w-5 h-5 text-blue-600" />
               User Management
             </CardTitle>
           </CardHeader>
           <CardContent>
             {loading ? (
               <div className="text-center py-10">
-                <RefreshCw className="w-8 h-8 animate-spin text-indigo-600 mx-auto" />
+                <RefreshCw className="w-8 h-8 animate-spin text-blue-600 mx-auto" />
                 <p className="text-slate-500 mt-2">Loading...</p>
               </div>
             ) : (
@@ -325,8 +325,8 @@ export function AdminPanel({ user }: { user: any }) {
                     className="flex items-center justify-between p-4 bg-slate-50 dark:bg-slate-900 rounded-xl"
                   >
                     <div className="flex items-center gap-3">
-                      <div className="w-10 h-10 bg-indigo-100 dark:bg-indigo-900/30 rounded-full flex items-center justify-center">
-                        <UserIcon className="w-5 h-5 text-indigo-600 dark:text-indigo-400" />
+                      <div className="w-10 h-10 bg-blue-100 dark:bg-blue-900/30 rounded-full flex items-center justify-center">
+                        <UserIcon className="w-5 h-5 text-blue-600 dark:text-blue-400" />
                       </div>
                       <div>
                         <p className="font-medium text-slate-900 dark:text-white">
@@ -409,7 +409,7 @@ export function AdminPanel({ user }: { user: any }) {
                       )}
                       
                       {u.id === user.id && (
-                        <Badge className="bg-indigo-100 text-indigo-800 dark:bg-indigo-900 dark:text-indigo-100">
+                        <Badge className="bg-blue-100 text-blue-800 dark:bg-blue-900 dark:text-blue-100">
                           You
                         </Badge>
                       )}
@@ -432,7 +432,7 @@ export function AdminPanel({ user }: { user: any }) {
         <Card className="mt-8">
           <CardHeader>
             <CardTitle className="flex items-center gap-2">
-              <Shield className="w-5 h-5 text-indigo-600" />
+              <Shield className="w-5 h-5 text-blue-600" />
               Role Permissions
             </CardTitle>
           </CardHeader>
