@@ -1,6 +1,8 @@
 import { createContext } from 'react';
 import { UserProfile } from './types';
-import type { AccentColor, GrayColor } from '@radix-ui/themes';
+
+type ThemeGrayColor = 'gray' | 'slate';
+type ThemeAccentColor = 'gray' | 'blue' | 'indigo' | 'violet' | 'purple' | 'plum' | 'crimson' | 'red' | 'ruby' | 'green' | 'jade' | 'teal' | 'cyan' | 'amber' | 'yellow' | 'gold' | 'orange' | 'tomato';
 
 export const AuthContext = createContext<{
   user: any | null;
@@ -11,7 +13,7 @@ export const AuthContext = createContext<{
 export const ThemeContext = createContext<{
   isDark: boolean;
   toggleTheme: () => void;
-  grayColor: GrayColor;
-  accentColor: AccentColor;
-  setColorScale: (gray: GrayColor, accent: AccentColor) => void;
+  grayColor: ThemeGrayColor;
+  accentColor: ThemeAccentColor;
+  setColorScale: (gray: ThemeGrayColor, accent: ThemeAccentColor) => void;
 } | null>(null);

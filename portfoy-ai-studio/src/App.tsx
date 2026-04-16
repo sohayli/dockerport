@@ -4,7 +4,9 @@ import Papa from 'papaparse';
 import React from 'react';
 import { AuthContext, ThemeContext } from './context';
 import { Theme as RadixTheme } from '@radix-ui/themes';
-import type { AccentColor, GrayColor } from '@radix-ui/themes';
+
+type ThemeGrayColor = 'gray' | 'slate';
+type ThemeAccentColor = 'gray' | 'blue' | 'indigo' | 'violet' | 'purple' | 'plum' | 'crimson' | 'red' | 'ruby' | 'green' | 'jade' | 'teal' | 'cyan' | 'amber' | 'yellow' | 'gold' | 'orange' | 'tomato';
 import { 
   getUser,
   createUser,
@@ -1915,13 +1917,13 @@ export default function App() {
     }
     return false;
   });
-  const [grayColor, setGrayColor] = useState<GrayColor>(() => {
+  const [grayColor, setGrayColor] = useState<ThemeGrayColor>(() => {
     const saved = localStorage.getItem('grayColor');
-    return (saved as GrayColor) || 'gray';
+    return (saved as ThemeGrayColor) || 'gray';
   });
-  const [accentColor, setAccentColor] = useState<AccentColor>(() => {
+  const [accentColor, setAccentColor] = useState<ThemeAccentColor>(() => {
     const saved = localStorage.getItem('accentColor');
-    return (saved as AccentColor) || 'gray';
+    return (saved as ThemeAccentColor) || 'gray';
   });
 
   useEffect(() => {
@@ -1943,7 +1945,7 @@ export default function App() {
   }, [accentColor]);
 
   const toggleTheme = () => setIsDark(prev => !prev);
-  const setColorScale = (gray: GrayColor, accent: AccentColor) => {
+  const setColorScale = (gray: ThemeGrayColor, accent: ThemeAccentColor) => {
     setGrayColor(gray);
     setAccentColor(accent);
   };

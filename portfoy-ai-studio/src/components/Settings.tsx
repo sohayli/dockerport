@@ -22,7 +22,9 @@ import { cn, formatCurrency } from '../lib/utils';
 import { AddPortfolioModal } from './modals/AddPortfolioModal';
 import { EditPortfolioModal } from './modals/EditPortfolioModal';
 import { ThemeContext } from '../context';
-import type { AccentColor, GrayColor } from '@radix-ui/themes';
+
+type ThemeGrayColor = 'gray' | 'slate';
+type ThemeAccentColor = 'gray' | 'blue' | 'indigo' | 'violet' | 'purple' | 'plum' | 'crimson' | 'red' | 'ruby' | 'green' | 'jade' | 'teal' | 'cyan' | 'amber' | 'yellow' | 'gold' | 'orange' | 'tomato';
 
 interface SettingsProps {
   profile: UserProfile | null;
@@ -37,12 +39,12 @@ interface SettingsProps {
 
 type SettingsTab = 'portfolios' | 'profile' | 'appearance' | 'security' | 'notifications' | 'data';
 
-const grayColors: { value: GrayColor; label: string }[] = [
+const grayColors: { value: ThemeGrayColor; label: string }[] = [
   { value: 'gray', label: 'Gray' },
   { value: 'slate', label: 'Slate' },
 ];
 
-const accentColors: { value: AccentColor; label: string }[] = [
+const accentColors: { value: ThemeAccentColor; label: string }[] = [
   { value: 'gray', label: 'Gray' },
   { value: 'blue', label: 'Blue' },
   { value: 'indigo', label: 'Indigo' },
