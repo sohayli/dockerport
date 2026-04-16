@@ -15,7 +15,7 @@ import {
   SidebarMenuSubItem,
 } from "@/components/ui/sidebar"
 import { Collapsible, CollapsibleContent, CollapsibleTrigger } from "@/components/ui/collapsible"
-import { LayoutDashboard, Wallet, TrendingUp, Shield, Settings, LogOut, Moon, Sun, User, Bell, Database, ChevronRight } from 'lucide-react'
+import { LayoutDashboard, Wallet, TrendingUp, Shield, Settings, LogOut, Moon, Sun, User, Bell, Database, ChevronRight, Palette } from 'lucide-react'
 import { signOut } from '../lib/api'
 import { ThemeContext } from '../context'
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar'
@@ -43,6 +43,7 @@ export function AppSidebar({ user, profile, currentView, currentSettingsTab, set
   const settingsSubItems = [
     { id: 'portfolios', label: 'Portfolios', icon: Wallet },
     { id: 'profile', label: 'Profile', icon: User },
+    { id: 'appearance', label: 'Appearance', icon: Palette },
     { id: 'security', label: 'Security', icon: Shield },
     { id: 'notifications', label: 'Notifications', icon: Bell },
     { id: 'data', label: 'Data Management', icon: Database },

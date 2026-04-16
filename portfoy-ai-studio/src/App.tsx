@@ -3,6 +3,8 @@ import * as d3 from 'd3';
 import Papa from 'papaparse';
 import React from 'react';
 import { AuthContext, ThemeContext } from './context';
+import { Theme as RadixTheme } from '@radix-ui/themes';
+import type { AccentColor, GrayColor } from '@radix-ui/themes';
 import { 
   getUser,
   createUser,
@@ -1913,6 +1915,14 @@ export default function App() {
     }
     return false;
   });
+  const [grayColor, setGrayColor] = useState<GrayColor>(() => {
+    const saved = localStorage.getItem('grayColor');
+    return (saved as GrayColor) || 'gray';
+  });
+  const [accentColor, setAccentColor] = useState<AccentColor>(() => {
+    const saved = localStorage.getItem('accentColor');
+    return (saved as AccentColor) || 'gray';
+  });
 
   useEffect(() => {
     if (isDark) {
@@ -1924,7 +1934,19 @@ export default function App() {
     }
   }, [isDark]);
 
+  useEffect(() => {
+    localStorage.setItem('grayColor', grayColor);
+  }, [grayColor]);
+
+  useEffect(() => {
+    localStorage.setItem('accentColor', accentColor);
+  }, [accentColor]);
+
   const toggleTheme = () => setIsDark(prev => !prev);
+  const setColorScale = (gray: GrayColor, accent: AccentColor) => {
+    setGrayColor(gray);
+    setAccentColor(accent);
+  };
 
   useEffect(() => {
     const token = getAuthToken();
@@ -2118,10 +2140,17 @@ export default function App() {
 
   return (
     <AuthContext.Provider value={{ user, profile, loading }}>
-      <ThemeContext.Provider value={{ isDark, toggleTheme }}>
-        <TooltipProvider>
-          <SidebarProvider>
-            <div className="min-h-screen bg-gray-100 dark:bg-gray-900 font-sans selection:bg-gray-300 dark:selection:bg-gray-700 selection:text-gray-900 dark:selection:text-gray-100 transition-colors flex w-full">
+      <ThemeContext.Provider value={{ isDark, toggleTheme, grayColor, accentColor, setColorScale }}>
+        <RadixTheme 
+          appearance={isDark ? 'dark' : 'light'} 
+          grayColor={grayColor}
+          accentColor={accentColor}
+          radius="medium"
+          scaling="100%"
+        >
+          <TooltipProvider>
+            <SidebarProvider>
+              <div className="min-h-screen bg-gray-100 dark:bg-gray-900 font-sans selection:bg-gray-300 dark:selection:bg-gray-700 selection:text-gray-900 dark:selection:text-gray-100 transition-colors flex w-full">
               {user && <AppSidebar user={user} profile={profile} currentView={view} currentSettingsTab={settingsTab} setView={setView} setSettingsTab={setSettingsTab} />}
               <main className="flex-1">
                 {user && (
@@ -2213,7 +2242,8 @@ export default function App() {
               </main>
             </div>
           </SidebarProvider>
-        </TooltipProvider>
+          </TooltipProvider>
+        </RadixTheme>
       </ThemeContext.Provider>
     </AuthContext.Provider>
   );
