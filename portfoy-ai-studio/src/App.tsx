@@ -30,6 +30,7 @@ import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import { Separator } from '@/components/ui/separator';
 import { Breadcrumb, BreadcrumbList, BreadcrumbItem, BreadcrumbLink, BreadcrumbSeparator, BreadcrumbPage } from '@/components/ui/breadcrumb';
+import { Collapsible, CollapsibleTrigger, CollapsibleContent } from '@/components/ui/collapsible';
 import { motion, AnimatePresence } from 'motion/react';
 import { UserProfile, Portfolio, Asset } from './types';
 import { fetchStockPrice, fetchCryptoPrice, fetchTefasPrice, fetchPriceHistory } from './services/finance';
@@ -1232,6 +1233,22 @@ function Dashboard({ view, portfolios, setView, selectedPortfolioId, setSelected
   const totalValue = calculateTotalValue();
   const totalCost = calculateTotalCost();
   const totalGainLoss = totalValue - totalCost;
+
+  const calculatePortfolioValue = (portfolioId: string) => {
+    return assets
+      .filter(a => a.portfolioId === portfolioId)
+      .reduce((total, asset) => {
+        const price = asset.currentPrice ?? asset.purchasePrice;
+        let value = price * asset.quantity;
+        
+        if (asset.type === 'GovernmentContribution') {
+          const vPercent = getAssetVestingPercent(asset);
+          value = value * (vPercent / 100);
+        }
+        
+        return total + value;
+      }, 0);
+  };
   const totalGainLossPercent = totalCost > 0 ? (totalGainLoss / totalCost) * 100 : 0;
   const annualDividends = calculateAnnualDividends();
   const monthlyDividends = annualDividends / 12;
@@ -1905,6 +1922,7 @@ export default function App() {
   const [portfolios, setPortfolios] = useState<Portfolio[]>([]);
   const [assets, setAssets] = useState<Asset[]>([]);
   const [selectedPortfolioId, setSelectedPortfolioId] = useState<string | null>('all');
+  const [portfolioDropdownOpen, setPortfolioDropdownOpen] = useState(false);
   const [isSyncing, setIsSyncing] = useState(false);
   const [syncResult, setSyncResult] = useState<{ success: boolean; count: number } | null>(null);
   const [isDark, setIsDark] = useState(() => {
@@ -2152,16 +2170,56 @@ export default function App() {
                     </Breadcrumb>
                     {(view === 'dashboard' || view === 'assets') && (
                       <div className="flex items-center gap-2">
-                        <select
-                          value={selectedPortfolioId || 'all'}
-                          onChange={(e) => setSelectedPortfolioId(e.target.value)}
-                          className="appearance-none bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 text-slate-900 dark:text-white px-3 py-1.5 pr-8 rounded-lg text-xs font-medium focus:ring-2 focus:ring-gray-500 outline-none cursor-pointer"
+                        <Collapsible 
+                          open={portfolioDropdownOpen}
+                          onOpenChange={setPortfolioDropdownOpen}
                         >
-                          <option value="all">All</option>
-                          {portfolios.map(p => (
-                            <option key={p.id} value={p.id}>{p.name}</option>
-                          ))}
-                        </select>
+                          <CollapsibleTrigger className="flex items-center gap-2 px-3 py-1.5 rounded-lg border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900 text-slate-900 dark:text-white text-xs font-medium hover:bg-slate-50 dark:hover:bg-slate-800 transition-colors cursor-pointer">
+                            <Wallet className="w-4 h-4" />
+                            <span>{selectedPortfolioId === 'all' ? 'All Portfolios' : portfolios.find(p => p.id === selectedPortfolioId)?.name || 'Select Portfolio'}</span>
+                            <ChevronDown className={cn("w-4 h-4 transition-transform", portfolioDropdownOpen && "rotate-180")} />
+                          </CollapsibleTrigger>
+                          <CollapsibleContent className="absolute right-4 top-12 z-50 w-64 mt-1 rounded-lg border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900 shadow-lg">
+                            <div className="p-1">
+                              <button
+                                onClick={() => {
+                                  setSelectedPortfolioId('all');
+                                  setPortfolioDropdownOpen(false);
+                                }}
+                                className={cn(
+                                  "w-full flex flex-col items-start px-3 py-2 rounded-md text-xs transition-colors",
+                                  selectedPortfolioId === 'all' 
+                                    ? "bg-slate-100 dark:bg-slate-800 text-slate-900 dark:text-white" 
+                                    : "hover:bg-slate-50 dark:hover:bg-slate-800 text-slate-700 dark:text-slate-300"
+                                )}
+                              >
+                                <span className="font-medium">All Portfolios</span>
+                                <span className="text-slate-500 dark:text-slate-400">{formatCurrency(totalValue)}</span>
+                              </button>
+                              {portfolios.map(p => {
+                                const pValue = calculatePortfolioValue(p.id);
+                                return (
+                                  <button
+                                    key={p.id}
+                                    onClick={() => {
+                                      setSelectedPortfolioId(p.id);
+                                      setPortfolioDropdownOpen(false);
+                                    }}
+                                    className={cn(
+                                      "w-full flex flex-col items-start px-3 py-2 rounded-md text-xs transition-colors",
+                                      selectedPortfolioId === p.id 
+                                        ? "bg-slate-100 dark:bg-slate-800 text-slate-900 dark:text-white" 
+                                        : "hover:bg-slate-50 dark:hover:bg-slate-800 text-slate-700 dark:text-slate-300"
+                                    )}
+                                  >
+                                    <span className="font-medium">{p.name}</span>
+                                    <span className="text-slate-500 dark:text-slate-400">{formatCurrency(pValue)}</span>
+                                  </button>
+                                );
+                              })}
+                            </div>
+                          </CollapsibleContent>
+                        </Collapsible>
                         <button
                           onClick={handleSyncTefas}
                           disabled={isSyncing}
