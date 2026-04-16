@@ -3,9 +3,6 @@ import * as d3 from 'd3';
 import Papa from 'papaparse';
 import React from 'react';
 import { AuthContext, ThemeContext } from './context';
-
-type ThemeGrayColor = 'gray' | 'slate';
-type ThemeAccentColor = 'gray' | 'blue' | 'indigo' | 'violet' | 'purple' | 'plum' | 'crimson' | 'red' | 'ruby' | 'green' | 'jade' | 'teal' | 'cyan' | 'amber' | 'yellow' | 'gold' | 'orange' | 'tomato';
 import { 
   getUser,
   createUser,
@@ -1916,14 +1913,6 @@ export default function App() {
     }
     return false;
   });
-  const [grayColor, setGrayColor] = useState<ThemeGrayColor>(() => {
-    const saved = localStorage.getItem('grayColor');
-    return (saved as ThemeGrayColor) || 'gray';
-  });
-  const [accentColor, setAccentColor] = useState<ThemeAccentColor>(() => {
-    const saved = localStorage.getItem('accentColor');
-    return (saved as ThemeAccentColor) || 'gray';
-  });
 
   useEffect(() => {
     if (isDark) {
@@ -1935,19 +1924,7 @@ export default function App() {
     }
   }, [isDark]);
 
-  useEffect(() => {
-    localStorage.setItem('grayColor', grayColor);
-  }, [grayColor]);
-
-  useEffect(() => {
-    localStorage.setItem('accentColor', accentColor);
-  }, [accentColor]);
-
   const toggleTheme = () => setIsDark(prev => !prev);
-  const setColorScale = (gray: ThemeGrayColor, accent: ThemeAccentColor) => {
-    setGrayColor(gray);
-    setAccentColor(accent);
-  };
 
   useEffect(() => {
     const token = getAuthToken();
@@ -2141,7 +2118,7 @@ export default function App() {
 
   return (
     <AuthContext.Provider value={{ user, profile, loading }}>
-      <ThemeContext.Provider value={{ isDark, toggleTheme, grayColor, accentColor, setColorScale }}>
+      <ThemeContext.Provider value={{ isDark, toggleTheme }}>
         <TooltipProvider>
           <SidebarProvider>
             <div className="min-h-screen bg-gray-100 dark:bg-gray-900 font-sans selection:bg-gray-300 dark:selection:bg-gray-700 selection:text-gray-900 dark:selection:bg-gray-100 transition-colors flex w-full">

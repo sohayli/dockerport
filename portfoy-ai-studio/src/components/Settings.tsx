@@ -10,7 +10,6 @@ import {
   Database,
   TrendingUp,
   Pencil,
-  Palette,
   Moon,
   Sun
 } from 'lucide-react';
@@ -23,9 +22,6 @@ import { AddPortfolioModal } from './modals/AddPortfolioModal';
 import { EditPortfolioModal } from './modals/EditPortfolioModal';
 import { ThemeContext } from '../context';
 
-type ThemeGrayColor = 'gray' | 'slate';
-type ThemeAccentColor = 'gray' | 'blue' | 'violet' | 'purple' | 'plum' | 'crimson' | 'red' | 'ruby' | 'green' | 'jade' | 'teal' | 'cyan' | 'amber' | 'yellow' | 'gold' | 'orange' | 'tomato';
-
 interface SettingsProps {
   profile: UserProfile | null;
   onUpdateProfile: (updates: Partial<UserProfile>) => void;
@@ -37,32 +33,7 @@ interface SettingsProps {
   setActiveTab?: (tab: string) => void;
 }
 
-type SettingsTab = 'portfolios' | 'profile' | 'appearance' | 'security' | 'notifications' | 'data';
-
-const grayColors: { value: ThemeGrayColor; label: string }[] = [
-  { value: 'gray', label: 'Gray' },
-  { value: 'slate', label: 'Slate' },
-];
-
-const accentColors: { value: ThemeAccentColor; label: string }[] = [
-  { value: 'gray', label: 'Gray' },
-  { value: 'blue', label: 'Blue' },
-  { value: 'violet', label: 'Violet' },
-  { value: 'purple', label: 'Purple' },
-  { value: 'plum', label: 'Plum' },
-  { value: 'crimson', label: 'Crimson' },
-  { value: 'red', label: 'Red' },
-  { value: 'ruby', label: 'Ruby' },
-  { value: 'green', label: 'Green' },
-  { value: 'jade', label: 'Jade' },
-  { value: 'teal', label: 'Teal' },
-  { value: 'cyan', label: 'Cyan' },
-  { value: 'amber', label: 'Amber' },
-  { value: 'yellow', label: 'Yellow' },
-  { value: 'gold', label: 'Gold' },
-  { value: 'orange', label: 'Orange' },
-  { value: 'tomato', label: 'Tomato' },
-];
+type SettingsTab = 'portfolios' | 'profile' | 'security' | 'notifications' | 'data';
 
 export function Settings({ profile, onUpdateProfile, portfolios, onAddPortfolio, onUpdatePortfolio, onDeletePortfolio, activeTab = 'portfolios', setActiveTab }: SettingsProps) {
   const currentTab = activeTab as SettingsTab;
@@ -217,81 +188,7 @@ export function Settings({ profile, onUpdateProfile, portfolios, onAddPortfolio,
             </div>
           )}
 
-          {currentTab === 'appearance' && (
-            <div className="space-y-6">
-              <div>
-                <h3 className="text-2xl font-bold text-slate-900 dark:text-white">Appearance</h3>
-                <p className="text-slate-500 dark:text-slate-400 mt-1">Customize the look and feel of the app.</p>
-              </div>
-
-              <Card className="p-6 space-y-6">
-                <div className="flex items-center gap-2 mb-2">
-                  <Palette className="w-5 h-5 text-gray-600" />
-                  <h4 className="font-bold text-slate-900 dark:text-white">Color Theme</h4>
-                </div>
-
-                <div className="space-y-4">
-                  <div>
-                    <label className="block text-sm font-medium text-slate-700 dark:text-slate-300 mb-3">Gray Color Scale</label>
-                    <div className="grid grid-cols-2 sm:grid-cols-3 gap-2">
-                      {grayColors.map((color) => (
-                        <button
-                          key={color.value}
-                          onClick={() => theme?.setColorScale(color.value, theme.accentColor)}
-                          className={cn(
-                            "px-4 py-2 rounded-lg text-sm font-medium transition-all border",
-                            theme?.grayColor === color.value
-                              ? "bg-gray-800 text-white border-gray-800"
-                              : "bg-white dark:bg-gray-800 text-gray-700 dark:text-gray-300 border-gray-300 dark:border-gray-600 hover:bg-gray-100 dark:hover:bg-gray-700"
-                          )}
-                        >
-                          {color.label}
-                        </button>
-                      ))}
-                    </div>
-                  </div>
-
-                  <div>
-                    <label className="block text-sm font-medium text-slate-700 dark:text-slate-300 mb-3">Accent Color</label>
-                    <div className="grid grid-cols-3 sm:grid-cols-4 md:grid-cols-6 gap-2">
-                      {accentColors.map((color) => (
-                        <button
-                          key={color.value}
-                          onClick={() => theme?.setColorScale(theme.grayColor, color.value)}
-                          className={cn(
-                            "px-3 py-2 rounded-lg text-xs font-medium transition-all border",
-                            theme?.accentColor === color.value
-                              ? "bg-gray-800 text-white border-gray-800"
-                              : "bg-white dark:bg-gray-800 text-gray-700 dark:text-gray-300 border-gray-300 dark:border-gray-600 hover:bg-gray-100 dark:hover:bg-gray-700"
-                          )}
-                        >
-                          {color.label}
-                        </button>
-                      ))}
-                    </div>
-                  </div>
-
-                  <div className="pt-4 border-t border-gray-200 dark:border-gray-700">
-                    <label className="block text-sm font-medium text-slate-700 dark:text-slate-300 mb-3">Dark Mode</label>
-                    <button
-                      onClick={() => theme?.toggleTheme()}
-                      className={cn(
-                        "px-4 py-2 rounded-lg text-sm font-medium transition-all border flex items-center gap-2",
-                        theme?.isDark
-                          ? "bg-gray-800 text-white border-gray-800"
-                          : "bg-white text-gray-700 border-gray-300 hover:bg-gray-100"
-                      )}
-                    >
-                      {theme?.isDark ? <Moon className="w-4 h-4" /> : <Sun className="w-4 h-4" />}
-                      {theme?.isDark ? 'Dark Mode Active' : 'Light Mode Active'}
-                    </button>
-                  </div>
-                </div>
-              </Card>
-            </div>
-          )}
-
-          {currentTab !== 'portfolios' && currentTab !== 'profile' && currentTab !== 'appearance' && (
+          {currentTab !== 'portfolios' && currentTab !== 'profile' && (
             <div className="text-center py-24 bg-white dark:bg-slate-900 rounded-[3rem] border border-slate-200 dark:border-slate-800">
               <SettingsIcon className="w-16 h-16 text-slate-200 dark:text-slate-800 mx-auto mb-4" />
               <h3 className="text-xl font-bold text-slate-900 dark:text-white">Coming Soon</h3>
