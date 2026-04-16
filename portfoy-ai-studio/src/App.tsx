@@ -1233,22 +1233,6 @@ function Dashboard({ view, portfolios, setView, selectedPortfolioId, setSelected
   const totalValue = calculateTotalValue();
   const totalCost = calculateTotalCost();
   const totalGainLoss = totalValue - totalCost;
-
-  const calculatePortfolioValue = (portfolioId: string) => {
-    return assets
-      .filter(a => a.portfolioId === portfolioId)
-      .reduce((total, asset) => {
-        const price = asset.currentPrice ?? asset.purchasePrice;
-        let value = price * asset.quantity;
-        
-        if (asset.type === 'GovernmentContribution') {
-          const vPercent = getAssetVestingPercent(asset);
-          value = value * (vPercent / 100);
-        }
-        
-        return total + value;
-      }, 0);
-  };
   const totalGainLossPercent = totalCost > 0 ? (totalGainLoss / totalCost) * 100 : 0;
   const annualDividends = calculateAnnualDividends();
   const monthlyDividends = annualDividends / 12;
@@ -2196,9 +2180,7 @@ export default function App() {
                                 <span className="font-medium">All Portfolios</span>
                                 <span className="text-slate-500 dark:text-slate-400">{formatCurrency(totalValue)}</span>
                               </button>
-                              {portfolios.map(p => {
-                                const pValue = calculatePortfolioValue(p.id);
-                                return (
+{portfolios.map(p => (
                                   <button
                                     key={p.id}
                                     onClick={() => {
@@ -2213,10 +2195,20 @@ export default function App() {
                                     )}
                                   >
                                     <span className="font-medium">{p.name}</span>
-                                    <span className="text-slate-500 dark:text-slate-400">{formatCurrency(pValue)}</span>
+                                    <span className="text-slate-500 dark:text-slate-400">{formatCurrency(assets.filter(a => a.portfolioId === p.id).reduce((total, asset) => {
+                                      const price = asset.currentPrice ?? asset.purchasePrice;
+                                      let value = price * asset.quantity;
+                                      if (asset.type === 'GovernmentContribution') {
+                                        const pFound = portfolios.find(port => port.id === asset.portfolioId);
+                                        if (pFound) {
+                                          const vPercent = calculateVestingPercentage(pFound.birthDate, pFound.besEntryDate);
+                                          value = value * (vPercent / 100);
+                                        }
+                                      }
+                                      return total + value;
+                                    }, 0))}</span>
                                   </button>
-                                );
-                              })}
+                                ))}
                             </div>
                           </CollapsibleContent>
                         </Collapsible>
