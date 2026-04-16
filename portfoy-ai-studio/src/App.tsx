@@ -62,7 +62,9 @@ import {
   X
 } from 'lucide-react';
 import { Treemap } from './components/dashboard/Treemap';
-import { Navbar } from './components/Navbar';
+import { AppSidebar } from './components/app-sidebar';
+import { SidebarProvider, SidebarTrigger } from '@/components/ui/sidebar';
+import { TooltipProvider } from '@/components/ui/tooltip';
 import { Settings } from './components/Settings';
 import { GovernmentContributionView } from './components/GovernmentContributionView';
 import { PassiveIncomeView } from './components/PassiveIncomeView';
@@ -2028,6 +2030,7 @@ export default function App() {
   const [profile, setProfile] = useState<UserProfile | null>(null);
   const [loading, setLoading] = useState(true);
   const [view, setView] = useState<'dashboard' | 'assets' | 'settings' | 'bes' | 'passive-income' | 'admin'>('dashboard');
+  const [settingsTab, setSettingsTab] = useState<string>('portfolios');
   const [portfolios, setPortfolios] = useState<Portfolio[]>([]);
   const [assets, setAssets] = useState<Asset[]>([]);
   const [isDark, setIsDark] = useState(() => {
@@ -2229,42 +2232,55 @@ export default function App() {
   return (
     <AuthContext.Provider value={{ user, profile, loading }}>
       <ThemeContext.Provider value={{ isDark, toggleTheme }}>
-        <div className="min-h-screen bg-slate-50 dark:bg-slate-950 font-sans selection:bg-indigo-100 dark:selection:bg-indigo-900 selection:text-indigo-900 dark:selection:text-indigo-100 transition-colors">
-<Navbar user={user} profile={profile} currentView={view} setView={setView} />
-          <main>
-            {user ? (
-              <>
-                {view === 'admin' && <AdminPanel user={user} />}
-                {view === 'settings' && (
+        <TooltipProvider>
+          <SidebarProvider>
+            <div className="min-h-screen bg-slate-50 dark:bg-slate-950 font-sans selection:bg-indigo-100 dark:selection:bg-indigo-900 selection:text-indigo-900 dark:selection:text-indigo-100 transition-colors flex w-full">
+              {user && <AppSidebar user={user} profile={profile} currentView={view} currentSettingsTab={settingsTab} setView={setView} setSettingsTab={setSettingsTab} />}
+              <main className="flex-1">
+                {user && (
+                  <header className="flex h-16 shrink-0 items-center gap-2 border-b border-slate-200 dark:border-slate-800 px-4">
+                    <SidebarTrigger className="-ml-1" />
+                  </header>
+                )}
+                <div className="p-4">
+                  {user ? (
+                    <>
+                      {view === 'admin' && <AdminPanel user={user} />}
+{view === 'settings' && (
                   <Settings 
                     profile={profile}
                     onUpdateProfile={handleUpdateProfile}
                     portfolios={portfolios} 
                     onAddPortfolio={handleAddPortfolio} 
                     onUpdatePortfolio={handleUpdatePortfolio}
-                    onDeletePortfolio={handleDeletePortfolio} 
+                    onDeletePortfolio={handleDeletePortfolio}
+                    activeTab={settingsTab}
+                    setActiveTab={setSettingsTab}
                   />
                 )}
-                {view === 'bes' && (
-                  <GovernmentContributionView 
-                    portfolios={portfolios}
-                    onUpdatePortfolio={handleUpdatePortfolio}
-                  />
-                )}
-                {view === 'passive-income' && (
-                  <PassiveIncomeView 
-                    portfolios={portfolios}
-                  />
-                )}
-                {(view === 'dashboard' || view === 'assets') && (
-                  <Dashboard view={view} portfolios={portfolios} setView={setView} />
-                )}
-              </>
-            ) : (
-              <LandingPage />
-            )}
-          </main>
-        </div>
+                      {view === 'bes' && (
+                        <GovernmentContributionView 
+                          portfolios={portfolios}
+                          onUpdatePortfolio={handleUpdatePortfolio}
+                        />
+                      )}
+                      {view === 'passive-income' && (
+                        <PassiveIncomeView 
+                          portfolios={portfolios}
+                        />
+                      )}
+                      {(view === 'dashboard' || view === 'assets') && (
+                        <Dashboard view={view} portfolios={portfolios} setView={setView} />
+                      )}
+                    </>
+                  ) : (
+                    <LandingPage />
+                  )}
+                </div>
+              </main>
+            </div>
+          </SidebarProvider>
+        </TooltipProvider>
       </ThemeContext.Provider>
     </AuthContext.Provider>
   );
