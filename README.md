@@ -1,35 +1,152 @@
 # Docker Port - Portfoy AI Studio
 
-Portfolio management application with Docker support.
+Portföy yönetim uygulaması - Docker destekli.
 
-## Project Structure
+## Gereksinimler
 
-- `portfoy-ai-studio/` - Main application with Docker configuration
+- Docker
+- Docker Compose
 
-## Quick Start
+## Hızlı Başlangıç
+
+### 1. Docker Kurulumu
+
+#### macOS
+```bash
+# Homebrew ile kurulum
+brew install --cask docker
+
+# veya Docker Desktop'ı indirin:
+# https://www.docker.com/products/docker-desktop/
+```
+
+#### Windows
+```bash
+# Docker Desktop for Windows indirin:
+# https://www.docker.com/products/docker-desktop/
+```
+
+#### Linux (Ubuntu/Debian)
+```bash
+# Docker kurulumu
+curl -fsSL https://get.docker.com -o get-docker.sh
+sudo sh get-docker.sh
+
+# Kullanıcıyı docker grubuna ekle
+sudo usermod -aG docker $USER
+
+# Docker Servisini başlat
+sudo systemctl start docker
+sudo systemctl enable docker
+```
+
+### 2. Projeyi Klonla
 
 ```bash
-cd portfoy-ai-studio
+git clone https://github.com/sohayli/dockerport.git
+cd dockerport/portfoy-ai-studio
+```
+
+### 3. Docker Compose ile Başlat
+
+```bash
 docker-compose up -d --build
 ```
 
-## Services
+### 4. Servisleri Kontrol Et
 
-- **App** - Node.js backend + React frontend (Port 3000)
-- **PostgreSQL** - Database (Port 5432)
+```bash
+docker-compose ps
+```
 
-## TEFAS Scraper
+## Servisler
 
-Scrapes all Turkish investment funds daily with USD conversion:
+| Servis | Port | Açıklama |
+|--------|------|----------|
+| App | 3000 | Node.js backend + React frontend |
+| PostgreSQL | 5432 | Veritabanı |
 
+## Erişim
+
+- **Uygulama:** http://localhost:3000
+- **Veritabanı:** localhost:5432
+  - Database: `portfoy_ai`
+  - Kullanıcı: `postgres`
+  - Şifre: `postgres`
+
+## Komutlar
+
+### Uygulamayı Durdur
+```bash
+docker-compose down
+```
+
+### Logları Görüntüle
+```bash
+docker-compose logs -f app
+docker-compose logs -f db
+```
+
+### Veritabanını Sıfırla
+```bash
+docker-compose down -v
+docker-compose up -d --build
+```
+
+### TEFAS Verilerini Çek
 ```bash
 docker exec portfoy_ai_studio-app-1 python3 scripts/scrape_tefas_historical.py
 ```
 
-## Features
+## Özellikler
 
-- 📊 Portfolio tracking
-- 💰 TEFAS fund prices (TRY + USD)
-- 🤖 Automated daily scraping
-- 📈 Passive income projections
-- 🇹🇷 BES (Turkish pension) calculations
+- 📊 Portföy takibi
+- 💰 TEFAS fon fiyatları (TRY + USD)
+- 🤖 Otomatik günlük veri çekme
+- 📈 Pasif gelir projeksiyonları
+- 🇹🇷 BES (Bireysel Emeklilik) hesaplamaları
+
+## Sorun Giderme
+
+### Port 3000 Zaten Kullanımda
+```bash
+# Kullanan işlemi bul
+lsof -i :3000
+
+# Durdur
+kill -9 <PID>
+```
+
+### Container Başlamıyor
+```bash
+# Logları kontrol et
+docker-compose logs app
+
+# Yeniden başlat
+docker-compose restart app
+```
+
+### Veritabanı Bağlantı Hatası
+```bash
+# Veritabanı container'ını kontrol et
+docker-compose ps db
+
+# Sağlıklı olduğundan emin ol
+docker-compose up -d db
+```
+
+## Ortam Değişkenleri
+
+`.env` dosyası oluşturarak isteğe bağlı ayarları yapabilirsiniz:
+
+```bash
+# Google OAuth için (opsiyonel)
+GOOGLE_CLIENT_ID=your-client-id
+
+# JWT Secret
+JWT_SECRET=your-secret-key
+```
+
+## Lisans
+
+MIT
