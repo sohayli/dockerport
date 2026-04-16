@@ -1440,38 +1440,26 @@ function Dashboard({ view, portfolios, setView }: { view: 'dashboard' | 'assets'
                 {/* Summary Cards */}
                 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
                   <Card className="p-4 rounded-xl">
-                    <div className="flex items-center justify-between mb-3">
-                      <div className="w-8 h-8 bg-emerald-50 dark:bg-emerald-900/20 rounded-lg flex items-center justify-center">
-                        <TrendingUp className="text-emerald-600 dark:text-emerald-400 w-4 h-4" />
-                      </div>
+                    <div className="flex items-center justify-between mb-2">
+                      <p className="text-xs font-semibold text-slate-500 dark:text-slate-400">Total Value</p>
                       <span className="text-[10px] font-bold text-emerald-600 bg-emerald-50 dark:bg-emerald-900/20 px-1.5 py-0.5 rounded">Live</span>
                     </div>
-                    <p className="text-[11px] font-medium text-slate-500 dark:text-slate-400 uppercase tracking-wide">Total Value</p>
-                    <p className="text-2xl font-bold text-slate-900 dark:text-white mt-1">{formatCurrency(totalValue)}</p>
-                    <p className="text-[10px] text-slate-400 mt-1">Converted to USD</p>
+                    <p className="text-xl font-bold text-slate-900 dark:text-white">{formatCurrency(totalValue)}</p>
+                    <p className="text-[10px] text-slate-400 mt-1">USD</p>
                   </Card>
 
                   <Card className="p-4 rounded-xl">
-                    <div className="flex items-center justify-between mb-3">
-                      <div className={cn(
-                        "w-8 h-8 rounded-lg flex items-center justify-center",
-                        totalGainLoss >= 0 ? "bg-emerald-50 dark:bg-emerald-900/20" : "bg-rose-50 dark:bg-rose-900/20"
-                      )}>
-                        <ArrowUpRight className={cn(
-                          "w-4 h-4",
-                          totalGainLoss >= 0 ? "text-emerald-600 dark:text-emerald-400" : "text-rose-600 dark:text-rose-400"
-                        )} />
-                      </div>
+                    <div className="flex items-center justify-between mb-2">
+                      <p className="text-xs font-semibold text-slate-500 dark:text-slate-400">Profit/Loss</p>
                       <span className={cn(
                         "text-[10px] font-bold px-1.5 py-0.5 rounded",
                         totalGainLoss >= 0 ? "text-emerald-600 bg-emerald-50 dark:bg-emerald-900/20" : "text-rose-600 bg-rose-50 dark:bg-rose-900/20"
                       )}>
-                        {totalGainLoss >= 0 ? '+' : ''}{totalGainLossPercent.toFixed(2)}%
+                        {totalGainLoss >= 0 ? '+' : ''}{totalGainLossPercent.toFixed(1)}%
                       </span>
                     </div>
-                    <p className="text-[11px] font-medium text-slate-500 dark:text-slate-400 uppercase tracking-wide">Total Profit/Loss</p>
                     <p className={cn(
-                      "text-2xl font-bold mt-1",
+                      "text-xl font-bold",
                       totalGainLoss >= 0 ? "text-emerald-600 dark:text-emerald-400" : "text-rose-600 dark:text-rose-400"
                     )}>
                       {totalGainLoss >= 0 ? '+' : ''}{formatCurrency(totalGainLoss)}
@@ -1480,28 +1468,22 @@ function Dashboard({ view, portfolios, setView }: { view: 'dashboard' | 'assets'
                   </Card>
 
                   <Card className="p-4 rounded-xl">
-                    <div className="flex items-center justify-between mb-3">
-                      <div className="w-8 h-8 bg-indigo-50 dark:bg-indigo-900/20 rounded-lg flex items-center justify-center">
-                        <RefreshCw className="text-indigo-600 dark:text-indigo-400 w-4 h-4" />
-                      </div>
+                    <div className="flex items-center justify-between mb-2">
+                      <p className="text-xs font-semibold text-slate-500 dark:text-slate-400">Monthly Dividend</p>
                     </div>
-                    <p className="text-[11px] font-medium text-slate-500 dark:text-slate-400 uppercase tracking-wide">Monthly Dividend</p>
-                    <p className="text-2xl font-bold text-slate-900 dark:text-white mt-1">{formatCurrency(monthlyDividends)}</p>
-                    <p className="text-[10px] text-slate-400 mt-1">{formatCurrency(annualDividends)} / year</p>
+                    <p className="text-xl font-bold text-slate-900 dark:text-white">{formatCurrency(monthlyDividends)}</p>
+                    <p className="text-[10px] text-slate-400 mt-1">{formatCurrency(annualDividends)}/yr</p>
                   </Card>
 
                   <Card className="p-4 rounded-xl">
-                    <div className="flex items-center justify-between mb-3">
-                      <div className="w-8 h-8 bg-purple-50 dark:bg-purple-900/20 rounded-lg flex items-center justify-center">
-                        <Target className="text-purple-600 dark:text-purple-400 w-4 h-4" />
-                      </div>
+                    <div className="flex items-center justify-between mb-2">
+                      <p className="text-xs font-semibold text-slate-500 dark:text-slate-400">Passive Income Goal</p>
                       <span className="text-[10px] font-bold text-purple-600 bg-purple-50 dark:bg-purple-900/20 px-1.5 py-0.5 rounded">
-                        {goalProgress.toFixed(1)}%
+                        {goalProgress.toFixed(0)}%
                       </span>
                     </div>
-                    <p className="text-[11px] font-medium text-slate-500 dark:text-slate-400 uppercase tracking-wide">Passive Income Goal</p>
-                    <p className="text-2xl font-bold text-slate-900 dark:text-white mt-1">{formatCurrency(monthlyGoal)}</p>
-                    <div className="mt-3 w-full bg-slate-100 dark:bg-slate-800 rounded-full h-1 overflow-hidden">
+                    <p className="text-xl font-bold text-slate-900 dark:text-white">{formatCurrency(monthlyGoal)}</p>
+                    <div className="mt-2 w-full bg-slate-100 dark:bg-slate-800 rounded-full h-1 overflow-hidden">
                       <div 
                         className="bg-purple-600 h-full transition-all duration-1000" 
                         style={{ width: `${Math.min(goalProgress, 100)}%` }}
@@ -1514,10 +1496,7 @@ function Dashboard({ view, portfolios, setView }: { view: 'dashboard' | 'assets'
                 <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
                   <div className="lg:col-span-1 space-y-4">
                     <Card className="p-4 rounded-xl h-full">
-                      <div className="flex items-center gap-2 mb-4">
-                        <PieChart className="w-4 h-4 text-indigo-600" />
-                        <h3 className="font-bold text-sm text-slate-900 dark:text-white">Asset Allocation</h3>
-                      </div>
+                      <p className="text-xs font-semibold text-slate-500 dark:text-slate-400 mb-4">Asset Allocation</p>
                       <div className="space-y-3">
                         {allocationData.map((item) => (
                           <div key={item.name} className="space-y-1.5">
@@ -1556,10 +1535,7 @@ function Dashboard({ view, portfolios, setView }: { view: 'dashboard' | 'assets'
 /* Assets Table View */
               <Card className="rounded-xl overflow-hidden">
                 <div className="px-4 py-3 border-b border-slate-100 dark:border-slate-800 flex flex-col sm:flex-row sm:items-center justify-between gap-3 bg-slate-50/50 dark:bg-slate-800/50">
-                  <div className="flex items-center gap-2">
-                    <Layers className="w-4 h-4 text-indigo-600" />
-                    <h3 className="font-bold text-sm text-slate-900 dark:text-white">Detailed Holdings</h3>
-                  </div>
+                  <p className="text-xs font-semibold text-slate-500 dark:text-slate-400">Holdings</p>
                   
                   <div className="flex items-center gap-2">
                     <button 
