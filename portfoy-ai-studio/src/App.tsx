@@ -1439,19 +1439,19 @@ function Dashboard({ view, portfolios, setView }: { view: 'dashboard' | 'assets'
               <>
                 {/* Summary Cards */}
                 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-                  <div className="bg-white dark:bg-slate-900 p-6 rounded-3xl border border-slate-200 dark:border-slate-800 shadow-sm transition-colors">
+                  <Card className="p-6 rounded-2xl">
                     <div className="flex items-center justify-between mb-4">
                       <div className="w-10 h-10 bg-emerald-50 dark:bg-emerald-900/20 rounded-xl flex items-center justify-center">
                         <TrendingUp className="text-emerald-600 dark:text-emerald-400 w-5 h-5" />
                       </div>
                       <span className="text-xs font-bold text-emerald-600 bg-emerald-50 dark:bg-emerald-900/20 px-2 py-1 rounded-lg">Live</span>
                     </div>
-                    <p className="text-sm font-medium text-slate-500 dark:text-slate-400 uppercase tracking-wider">Total Value</p>
-                    <h3 className="text-3xl font-bold text-slate-900 dark:text-white mt-1">{formatCurrency(totalValue)}</h3>
-                    <p className="text-xs text-slate-400 mt-2">Converted to USD</p>
-                  </div>
+                    <CardTitle className="text-sm font-medium text-slate-500 dark:text-slate-400 uppercase tracking-wider">Total Value</CardTitle>
+                    <CardContent className="text-3xl font-bold text-slate-900 dark:text-white mt-1 p-0">{formatCurrency(totalValue)}</CardContent>
+                    <CardDescription className="text-xs text-slate-400 mt-2">Converted to USD</CardDescription>
+                  </Card>
 
-                  <div className="bg-white dark:bg-slate-900 p-6 rounded-3xl border border-slate-200 dark:border-slate-800 shadow-sm transition-colors">
+                  <Card className="p-6 rounded-2xl">
                     <div className="flex items-center justify-between mb-4">
                       <div className={cn(
                         "w-10 h-10 rounded-xl flex items-center justify-center",
@@ -1469,28 +1469,28 @@ function Dashboard({ view, portfolios, setView }: { view: 'dashboard' | 'assets'
                         {totalGainLoss >= 0 ? '+' : ''}{totalGainLossPercent.toFixed(2)}%
                       </span>
                     </div>
-                    <p className="text-sm font-medium text-slate-500 dark:text-slate-400 uppercase tracking-wider">Total Profit/Loss</p>
-                    <h3 className={cn(
-                      "text-3xl font-bold mt-1",
+                    <CardTitle className="text-sm font-medium text-slate-500 dark:text-slate-400 uppercase tracking-wider">Total Profit/Loss</CardTitle>
+                    <CardContent className={cn(
+                      "text-3xl font-bold mt-1 p-0",
                       totalGainLoss >= 0 ? "text-emerald-600 dark:text-emerald-400" : "text-rose-600 dark:text-rose-400"
                     )}>
                       {totalGainLoss >= 0 ? '+' : ''}{formatCurrency(totalGainLoss)}
-                    </h3>
-                    <p className="text-xs text-slate-400 mt-2">Cost: {formatCurrency(totalCost)}</p>
-                  </div>
+                    </CardContent>
+                    <CardDescription className="text-xs text-slate-400 mt-2">Cost: {formatCurrency(totalCost)}</CardDescription>
+                  </Card>
 
-                  <div className="bg-white dark:bg-slate-900 p-6 rounded-3xl border border-slate-200 dark:border-slate-800 shadow-sm transition-colors">
+                  <Card className="p-6 rounded-2xl">
                     <div className="flex items-center justify-between mb-4">
                       <div className="w-10 h-10 bg-indigo-50 dark:bg-indigo-900/20 rounded-xl flex items-center justify-center">
                         <RefreshCw className="text-indigo-600 dark:text-indigo-400 w-5 h-5" />
                       </div>
                     </div>
-                    <p className="text-sm font-medium text-slate-500 dark:text-slate-400 uppercase tracking-wider">Monthly Dividend</p>
-                    <h3 className="text-3xl font-bold text-slate-900 dark:text-white mt-1">{formatCurrency(monthlyDividends)}</h3>
-                    <p className="text-xs text-slate-400 mt-2">{formatCurrency(annualDividends)} / year</p>
-                  </div>
+                    <CardTitle className="text-sm font-medium text-slate-500 dark:text-slate-400 uppercase tracking-wider">Monthly Dividend</CardTitle>
+                    <CardContent className="text-3xl font-bold text-slate-900 dark:text-white mt-1 p-0">{formatCurrency(monthlyDividends)}</CardContent>
+                    <CardDescription className="text-xs text-slate-400 mt-2">{formatCurrency(annualDividends)} / year</CardDescription>
+                  </Card>
 
-                  <div className="bg-white dark:bg-slate-900 p-6 rounded-3xl border border-slate-200 dark:border-slate-800 shadow-sm transition-colors">
+                  <Card className="p-6 rounded-2xl">
                     <div className="flex items-center justify-between mb-4">
                       <div className="w-10 h-10 bg-purple-50 dark:bg-purple-900/20 rounded-xl flex items-center justify-center">
                         <Target className="text-purple-600 dark:text-purple-400 w-5 h-5" />
@@ -1499,26 +1499,28 @@ function Dashboard({ view, portfolios, setView }: { view: 'dashboard' | 'assets'
                         {goalProgress.toFixed(1)}%
                       </span>
                     </div>
-                    <p className="text-sm font-medium text-slate-500 dark:text-slate-400 uppercase tracking-wider">Passive Income Goal</p>
-                    <h3 className="text-3xl font-bold text-slate-900 dark:text-white mt-1">{formatCurrency(monthlyGoal)}</h3>
+                    <CardTitle className="text-sm font-medium text-slate-500 dark:text-slate-400 uppercase tracking-wider">Passive Income Goal</CardTitle>
+                    <CardContent className="text-3xl font-bold text-slate-900 dark:text-white mt-1 p-0">{formatCurrency(monthlyGoal)}</CardContent>
                     <div className="mt-4 w-full bg-slate-100 dark:bg-slate-800 rounded-full h-1.5 overflow-hidden">
                       <div 
                         className="bg-purple-600 h-full transition-all duration-1000" 
                         style={{ width: `${Math.min(goalProgress, 100)}%` }}
                       />
                     </div>
-                  </div>
+                  </Card>
                 </div>
 
                 {/* Allocation & Treemap */}
                 <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
                   <div className="lg:col-span-1 space-y-6">
-                    <div className="bg-white dark:bg-slate-900 p-6 rounded-3xl border border-slate-200 dark:border-slate-800 shadow-sm transition-colors h-full">
-                      <div className="flex items-center gap-2 mb-6">
-                        <PieChart className="w-5 h-5 text-indigo-600" />
-                        <h3 className="font-bold text-slate-900 dark:text-white">Asset Allocation</h3>
-                      </div>
-                      <div className="space-y-4">
+                    <Card className="p-6 rounded-2xl h-full">
+                      <CardHeader className="p-0 mb-6">
+                        <div className="flex items-center gap-2">
+                          <PieChart className="w-5 h-5 text-indigo-600" />
+                          <CardTitle className="font-bold text-slate-900 dark:text-white">Asset Allocation</CardTitle>
+                        </div>
+                      </CardHeader>
+                      <CardContent className="space-y-4 p-0">
                         {allocationData.map((item) => (
                           <div key={item.name} className="space-y-2">
                             <div className="flex justify-between items-center text-sm">
@@ -1544,8 +1546,8 @@ function Dashboard({ view, portfolios, setView }: { view: 'dashboard' | 'assets'
                             No data available
                           </div>
                         )}
-                      </div>
-                    </div>
+                      </CardContent>
+                    </Card>
                   </div>
                   <div className="lg:col-span-2">
                     <Treemap data={treemapData} />
@@ -1554,11 +1556,11 @@ function Dashboard({ view, portfolios, setView }: { view: 'dashboard' | 'assets'
               </>
             ) : (
               /* Assets Table View */
-              <div className="bg-white dark:bg-slate-900 rounded-3xl border border-slate-200 dark:border-slate-800 shadow-sm overflow-hidden transition-colors">
-                <div className="px-6 py-5 border-b border-slate-100 dark:border-slate-800 flex flex-col sm:flex-row sm:items-center justify-between gap-4 bg-slate-50/50 dark:bg-slate-800/50">
+              <Card className="rounded-2xl overflow-hidden">
+                <CardHeader className="px-6 py-5 border-b border-slate-100 dark:border-slate-800 flex flex-col sm:flex-row sm:items-center justify-between gap-4 bg-slate-50/50 dark:bg-slate-800/50">
                   <div className="flex items-center gap-2">
                     <Layers className="w-4 h-4 text-indigo-600" />
-                    <h3 className="font-bold text-slate-900 dark:text-white">Detailed Holdings</h3>
+                    <CardTitle className="font-bold text-slate-900 dark:text-white">Detailed Holdings</CardTitle>
                   </div>
                   
                   <div className="flex items-center gap-3">
@@ -1613,8 +1615,8 @@ function Dashboard({ view, portfolios, setView }: { view: 'dashboard' | 'assets'
                       </button>
                     )}
                   </div>
-                </div>
-                <div className="overflow-x-auto">
+                </CardHeader>
+                <CardContent className="p-0 overflow-x-auto">
                   <table className="w-full text-left border-collapse">
                     <thead>
                       <tr className="text-xs font-bold text-slate-400 dark:text-slate-500 uppercase tracking-wider border-b border-slate-100 dark:border-slate-800">
@@ -1787,26 +1789,26 @@ function Dashboard({ view, portfolios, setView }: { view: 'dashboard' | 'assets'
                       )}
                     </tbody>
                   </table>
-                </div>
-              </div>
+                </CardContent>
+              </Card>
             )}
           </>
         ) : (
-          <div className="h-96 flex flex-col items-center justify-center text-center bg-white dark:bg-slate-900 rounded-[2rem] border border-dashed border-slate-300 dark:border-slate-800 p-8 transition-colors">
+          <Card className="h-96 flex flex-col items-center justify-center text-center rounded-2xl border border-dashed border-slate-300 dark:border-slate-800 p-8">
             <div className="w-20 h-20 bg-slate-50 dark:bg-slate-800 rounded-3xl flex items-center justify-center mb-6">
               <Wallet className="text-slate-300 dark:text-slate-600 w-10 h-10" />
             </div>
-            <h2 className="text-2xl font-bold text-slate-900 dark:text-white">Start Your Journey</h2>
-            <p className="text-slate-500 dark:text-slate-400 mt-2 max-w-sm mx-auto">
+            <CardTitle className="text-2xl font-bold text-slate-900 dark:text-white">Start Your Journey</CardTitle>
+            <CardDescription className="mt-2 max-w-sm mx-auto">
               Create your first portfolio to start tracking your investments in USD with real-time price data.
-            </p>
+            </CardDescription>
             <button 
               onClick={() => setView('settings')}
               className="mt-8 bg-indigo-600 text-white px-8 py-3 rounded-2xl font-bold hover:bg-indigo-700 transition-all shadow-xl shadow-indigo-100 dark:shadow-none"
             >
               Go to Settings to Create Portfolio
             </button>
-          </div>
+          </Card>
         )}
       </div>
 
