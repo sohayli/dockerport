@@ -1438,52 +1438,50 @@ function Dashboard({ view, portfolios, setView }: { view: 'dashboard' | 'assets'
             {view === 'dashboard' ? (
               <>
                 {/* Summary Cards */}
-                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
-                  <Card className="p-4 rounded-xl">
-                    <div className="flex items-center justify-between mb-2">
-                      <p className="text-xs font-semibold text-slate-500 dark:text-slate-400">Total Value</p>
-                      <span className="text-[10px] font-bold text-emerald-600 bg-emerald-50 dark:bg-emerald-900/20 px-1.5 py-0.5 rounded">Live</span>
+                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-3">
+                  <Card className="p-3 rounded-xl">
+                    <div className="flex items-center justify-between">
+                      <p className="text-[11px] font-medium text-slate-500 dark:text-slate-400">Total Value</p>
+                      <span className="text-[10px] font-bold text-emerald-600 bg-emerald-50 dark:bg-emerald-900/20 px-1 py-0.5 rounded">Live</span>
                     </div>
-                    <p className="text-xl font-bold text-slate-900 dark:text-white">{formatCurrency(totalValue)}</p>
-                    <p className="text-[10px] text-slate-400 mt-1">USD</p>
+                    <p className="text-lg font-bold text-slate-900 dark:text-white mt-1">{formatCurrency(totalValue)}</p>
+                    <p className="text-[10px] text-slate-400">USD</p>
                   </Card>
 
-                  <Card className="p-4 rounded-xl">
-                    <div className="flex items-center justify-between mb-2">
-                      <p className="text-xs font-semibold text-slate-500 dark:text-slate-400">Profit/Loss</p>
+                  <Card className="p-3 rounded-xl">
+                    <div className="flex items-center justify-between">
+                      <p className="text-[11px] font-medium text-slate-500 dark:text-slate-400">Profit/Loss</p>
                       <span className={cn(
-                        "text-[10px] font-bold px-1.5 py-0.5 rounded",
+                        "text-[10px] font-bold px-1 py-0.5 rounded",
                         totalGainLoss >= 0 ? "text-emerald-600 bg-emerald-50 dark:bg-emerald-900/20" : "text-rose-600 bg-rose-50 dark:bg-rose-900/20"
                       )}>
                         {totalGainLoss >= 0 ? '+' : ''}{totalGainLossPercent.toFixed(1)}%
                       </span>
                     </div>
                     <p className={cn(
-                      "text-xl font-bold",
+                      "text-lg font-bold mt-1",
                       totalGainLoss >= 0 ? "text-emerald-600 dark:text-emerald-400" : "text-rose-600 dark:text-rose-400"
                     )}>
                       {totalGainLoss >= 0 ? '+' : ''}{formatCurrency(totalGainLoss)}
                     </p>
-                    <p className="text-[10px] text-slate-400 mt-1">Cost: {formatCurrency(totalCost)}</p>
+                    <p className="text-[10px] text-slate-400">Cost: {formatCurrency(totalCost)}</p>
                   </Card>
 
-                  <Card className="p-4 rounded-xl">
-                    <div className="flex items-center justify-between mb-2">
-                      <p className="text-xs font-semibold text-slate-500 dark:text-slate-400">Monthly Dividend</p>
-                    </div>
-                    <p className="text-xl font-bold text-slate-900 dark:text-white">{formatCurrency(monthlyDividends)}</p>
-                    <p className="text-[10px] text-slate-400 mt-1">{formatCurrency(annualDividends)}/yr</p>
+                  <Card className="p-3 rounded-xl">
+                    <p className="text-[11px] font-medium text-slate-500 dark:text-slate-400">Monthly Dividend</p>
+                    <p className="text-lg font-bold text-slate-900 dark:text-white mt-1">{formatCurrency(monthlyDividends)}</p>
+                    <p className="text-[10px] text-slate-400">{formatCurrency(annualDividends)}/yr</p>
                   </Card>
 
-                  <Card className="p-4 rounded-xl">
-                    <div className="flex items-center justify-between mb-2">
-                      <p className="text-xs font-semibold text-slate-500 dark:text-slate-400">Passive Income Goal</p>
-                      <span className="text-[10px] font-bold text-purple-600 bg-purple-50 dark:bg-purple-900/20 px-1.5 py-0.5 rounded">
+                  <Card className="p-3 rounded-xl">
+                    <div className="flex items-center justify-between">
+                      <p className="text-[11px] font-medium text-slate-500 dark:text-slate-400">Passive Income Goal</p>
+                      <span className="text-[10px] font-bold text-purple-600 bg-purple-50 dark:bg-purple-900/20 px-1 py-0.5 rounded">
                         {goalProgress.toFixed(0)}%
                       </span>
                     </div>
-                    <p className="text-xl font-bold text-slate-900 dark:text-white">{formatCurrency(monthlyGoal)}</p>
-                    <div className="mt-2 w-full bg-slate-100 dark:bg-slate-800 rounded-full h-1 overflow-hidden">
+                    <p className="text-lg font-bold text-slate-900 dark:text-white mt-1">{formatCurrency(monthlyGoal)}</p>
+                    <div className="mt-1.5 w-full bg-slate-100 dark:bg-slate-800 rounded-full h-1 overflow-hidden">
                       <div 
                         className="bg-purple-600 h-full transition-all duration-1000" 
                         style={{ width: `${Math.min(goalProgress, 100)}%` }}
@@ -1492,29 +1490,26 @@ function Dashboard({ view, portfolios, setView }: { view: 'dashboard' | 'assets'
                   </Card>
                 </div>
 
-                {/* Allocation & Treemap */}
-                <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
-                  <div className="lg:col-span-1 space-y-4">
-                    <Card className="p-4 rounded-xl h-full">
-                      <p className="text-xs font-semibold text-slate-500 dark:text-slate-400 mb-4">Asset Allocation</p>
-                      <div className="space-y-3">
+{/* Allocation & Treemap */}
+                <div className="grid grid-cols-1 lg:grid-cols-3 gap-4">
+                  <div className="lg:col-span-1">
+                    <Card className="p-3 rounded-xl h-full">
+                      <p className="text-[11px] font-medium text-slate-500 dark:text-slate-400 mb-3">Asset Allocation</p>
+                      <div className="space-y-2">
                         {allocationData.map((item) => (
-                          <div key={item.name} className="space-y-1.5">
-                            <div className="flex justify-between items-center text-xs">
-                              <span className="font-medium text-slate-600 dark:text-slate-400 flex items-center gap-2">
+                          <div key={item.name}>
+                            <div className="flex justify-between items-center text-[11px]">
+                              <span className="font-medium text-slate-600 dark:text-slate-400 flex items-center gap-1.5">
                                 <div className="w-2 h-2 rounded-full" style={{ backgroundColor: item.color }} />
                                 {item.name}
                               </span>
                               <span className="font-bold text-slate-900 dark:text-white">{item.percentage.toFixed(1)}%</span>
                             </div>
-                            <div className="w-full bg-slate-100 dark:bg-slate-800 rounded-full h-1 overflow-hidden">
+                            <div className="w-full bg-slate-100 dark:bg-slate-800 rounded-full h-1 overflow-hidden mt-0.5">
                               <div 
                                 className="h-full transition-all duration-1000" 
                                 style={{ width: `${item.percentage}%`, backgroundColor: item.color }}
                               />
-                            </div>
-                            <div className="text-[10px] text-slate-400 text-right">
-                              {formatCurrency(item.value)}
                             </div>
                           </div>
                         ))}
@@ -1534,8 +1529,8 @@ function Dashboard({ view, portfolios, setView }: { view: 'dashboard' | 'assets'
             ) : (
 /* Assets Table View */
               <Card className="rounded-xl overflow-hidden">
-                <div className="px-4 py-3 border-b border-slate-100 dark:border-slate-800 flex flex-col sm:flex-row sm:items-center justify-between gap-3 bg-slate-50/50 dark:bg-slate-800/50">
-                  <p className="text-xs font-semibold text-slate-500 dark:text-slate-400">Holdings</p>
+                <div className="px-3 py-2 border-b border-slate-100 dark:border-slate-800 flex flex-col sm:flex-row sm:items-center justify-between gap-2 bg-slate-50/50 dark:bg-slate-800/50">
+                  <p className="text-[11px] font-medium text-slate-500 dark:text-slate-400">Holdings</p>
                   
                   <div className="flex items-center gap-2">
                     <button 
@@ -1594,16 +1589,16 @@ function Dashboard({ view, portfolios, setView }: { view: 'dashboard' | 'assets'
                   <table className="w-full text-left border-collapse">
                     <thead>
                       <tr className="text-[10px] font-bold text-slate-400 dark:text-slate-500 uppercase tracking-wider border-b border-slate-100 dark:border-slate-800">
-                        <th className="px-4 py-3">Asset</th>
-                        <th className="px-4 py-3">Type</th>
-                        <th className="px-4 py-3">Div. Yield</th>
-                        <th className="px-4 py-3">5Y Growth</th>
-                        <th className="px-4 py-3">10Y Growth</th>
-                        <th className="px-4 py-3">Quantity</th>
-                        <th className="px-4 py-3">Purchase Price</th>
-                        <th className="px-4 py-3">Current Value</th>
-                        <th className="px-4 py-3">Gain/Loss</th>
-                        <th className="px-4 py-3 text-right">Actions</th>
+                        <th className="px-3 py-2">Asset</th>
+                        <th className="px-3 py-2">Type</th>
+                        <th className="px-3 py-2">Div. Yield</th>
+                        <th className="px-3 py-2">5Y Growth</th>
+                        <th className="px-3 py-2">10Y Growth</th>
+                        <th className="px-3 py-2">Quantity</th>
+                        <th className="px-3 py-2">Purchase Price</th>
+                        <th className="px-3 py-2">Current Value</th>
+                        <th className="px-3 py-2">Gain/Loss</th>
+                        <th className="px-3 py-2 text-right">Actions</th>
                       </tr>
                     </thead>
                     <tbody className="divide-y divide-slate-50 dark:divide-slate-800">
@@ -1625,21 +1620,18 @@ function Dashboard({ view, portfolios, setView }: { view: 'dashboard' | 'assets'
 
                         return (
                           <tr key={asset.id} className="hover:bg-slate-50/50 dark:hover:bg-slate-800/50 transition-colors group">
-                            <td className="px-4 py-3">
+                            <td className="px-3 py-2">
                               <div className="flex items-center gap-2">
                                 <div className="flex flex-col">
-                                  <span className="font-bold text-xs text-slate-900 dark:text-white">{asset.symbol}</span>
+                                  <span className="font-bold text-[11px] text-slate-900 dark:text-white">{asset.symbol}</span>
                                   <span className="text-[10px] text-slate-500 dark:text-slate-400">{asset.name}</span>
-                                </div>
-                                <div className="hidden md:block">
-                                  <Sparkline symbol={asset.symbol} type={asset.type} />
                                 </div>
                               </div>
                             </td>
-                            <td className="px-4 py-3">
+                            <td className="px-3 py-2">
                               <div className="flex flex-col gap-0.5">
                                 <span className={cn(
-                                  "inline-flex items-center px-2 py-0.5 rounded text-[10px] font-bold uppercase tracking-wider w-fit",
+                                  "inline-flex items-center px-1.5 py-0.5 rounded text-[10px] font-bold uppercase tracking-wider w-fit",
                                   asset.type === 'Stock' ? "bg-indigo-50 dark:bg-indigo-900/30 text-indigo-600 dark:text-indigo-400" :
                                   asset.type === 'Crypto' ? "bg-amber-50 dark:bg-amber-900/30 text-amber-600 dark:text-amber-400" :
                                   asset.type === 'Commodity' ? "bg-emerald-50 dark:bg-emerald-900/30 text-emerald-600 dark:text-emerald-400" :
@@ -1661,46 +1653,46 @@ function Dashboard({ view, portfolios, setView }: { view: 'dashboard' | 'assets'
                                 )}
                               </div>
                             </td>
-                            <td className="px-4 py-3">
+                            <td className="px-3 py-2">
                               {asset.dividendYield ? (
-                                <span className="text-xs font-bold text-indigo-600 dark:text-indigo-400 bg-indigo-50 dark:bg-indigo-900/20 px-1.5 py-0.5 rounded">
+                                <span className="text-[10px] font-bold text-indigo-600 dark:text-indigo-400 bg-indigo-50 dark:bg-indigo-900/20 px-1 py-0.5 rounded">
                                   {(asset.dividendYield * 100).toFixed(2)}%
                                 </span>
                               ) : (
                                 <span className="text-slate-400 text-[10px]">-</span>
                               )}
                             </td>
-                            <td className="px-4 py-3">
+                            <td className="px-3 py-2">
                               {asset.dividendGrowth5Y ? (
                                 <span className={cn(
                                   "text-[10px] font-bold",
                                   asset.dividendGrowth5Y > 0 ? "text-emerald-600 dark:text-emerald-400" : "text-rose-600 dark:text-rose-400"
                                 )}>
-                                  {asset.dividendGrowth5Y > 0 ? '+' : ''}{(asset.dividendGrowth5Y * 100).toFixed(2)}%
+                                  {asset.dividendGrowth5Y > 0 ? '+' : ''}{(asset.dividendGrowth5Y * 100).toFixed(1)}%
                                 </span>
                               ) : (
                                 <span className="text-slate-400 text-[10px]">-</span>
                               )}
                             </td>
-                            <td className="px-4 py-3">
+                            <td className="px-3 py-2">
                               {asset.dividendGrowth10Y ? (
                                 <span className={cn(
                                   "text-[10px] font-bold",
                                   asset.dividendGrowth10Y > 0 ? "text-emerald-600 dark:text-emerald-400" : "text-rose-600 dark:text-rose-400"
                                 )}>
-                                  {asset.dividendGrowth10Y > 0 ? '+' : ''}{(asset.dividendGrowth10Y * 100).toFixed(2)}%
+                                  {asset.dividendGrowth10Y > 0 ? '+' : ''}{(asset.dividendGrowth10Y * 100).toFixed(1)}%
                                 </span>
                               ) : (
                                 <span className="text-slate-400 text-[10px]">-</span>
                               )}
                             </td>
-                            <td className="px-4 py-3 font-medium text-xs text-slate-700 dark:text-slate-300">
+                            <td className="px-3 py-2 font-medium text-[11px] text-slate-700 dark:text-slate-300">
                               {formatNumber(asset.quantity)}
                             </td>
-                            <td className="px-4 py-3 text-xs text-slate-600 dark:text-slate-400">
+                            <td className="px-3 py-2 text-[11px] text-slate-600 dark:text-slate-400">
                               {formatCurrency(asset.purchasePrice, 'USD')}
                             </td>
-                            <td className="px-4 py-3 font-bold text-xs text-slate-900 dark:text-white">
+                            <td className="px-3 py-2 font-bold text-[11px] text-slate-900 dark:text-white">
                               <div className="flex flex-col">
                                 <span>{formatCurrency(currentValue)}</span>
                                 {asset.currentPrice && (
@@ -1710,11 +1702,11 @@ function Dashboard({ view, portfolios, setView }: { view: 'dashboard' | 'assets'
                                 )}
                               </div>
                             </td>
-                            <td className="px-4 py-3">
+                            <td className="px-3 py-2">
                               {asset.currentPrice ? (
                                 <div className="flex flex-col">
                                   <span className={cn(
-                                    "font-bold text-xs",
+                                    "font-bold text-[11px]",
                                     gainLoss >= 0 ? "text-emerald-600 dark:text-emerald-400" : "text-rose-600 dark:text-rose-400"
                                   )}>
                                     {gainLoss >= 0 ? '+' : ''}{formatCurrency(gainLoss)}
@@ -1723,31 +1715,31 @@ function Dashboard({ view, portfolios, setView }: { view: 'dashboard' | 'assets'
                                     "text-[10px] font-medium",
                                     gainLoss >= 0 ? "text-emerald-500/70" : "text-rose-500/70"
                                   )}>
-                                    {gainLoss >= 0 ? '+' : ''}{gainLossPercent.toFixed(2)}%
+                                    {gainLoss >= 0 ? '+' : ''}{gainLossPercent.toFixed(1)}%
                                   </span>
                                 </div>
                               ) : (
-                                <span className="text-slate-400 text-[10px] italic">Awaiting...</span>
+                                <span className="text-slate-400 text-[10px] italic">-</span>
                               )}
                             </td>
-                            <td className="px-4 py-3 text-right">
+                            <td className="px-3 py-2 text-right">
                               <div className="flex items-center justify-end gap-1 opacity-0 group-hover:opacity-100 transition-opacity">
                                 <button 
                                   onClick={() => {
                                     setEditingAsset(asset);
                                     setIsEditAssetOpen(true);
                                   }}
-                                  className="p-1.5 text-slate-300 dark:text-slate-600 hover:text-indigo-600 dark:hover:text-indigo-400 transition-colors"
-                                  title="Edit asset"
+                                  className="p-1 text-slate-300 dark:text-slate-600 hover:text-indigo-600 dark:hover:text-indigo-400 transition-colors"
+                                  title="Edit"
                                 >
-                                  <Pencil className="w-3.5 h-3.5" />
+                                  <Pencil className="w-3 h-3" />
                                 </button>
                                 <button 
                                   onClick={() => handleDeleteAsset(asset.id)}
-                                  className="p-1.5 text-slate-300 dark:text-slate-600 hover:text-rose-600 dark:hover:text-rose-400 transition-colors"
-                                  title="Delete asset"
+                                  className="p-1 text-slate-300 dark:text-slate-600 hover:text-rose-600 dark:hover:text-rose-400 transition-colors"
+                                  title="Delete"
                                 >
-                                  <Trash2 className="w-3.5 h-3.5" />
+                                  <Trash2 className="w-3 h-3" />
                                 </button>
                               </div>
                             </td>
@@ -1756,8 +1748,8 @@ function Dashboard({ view, portfolios, setView }: { view: 'dashboard' | 'assets'
                       })}
                       {filteredAssets.length === 0 && (
                         <tr>
-                          <td colSpan={10} className="px-4 py-8 text-center text-slate-400 dark:text-slate-500 italic text-xs">
-                            {searchQuery ? "No assets match your search." : "No assets. Click \"Add\" to get started."}
+                          <td colSpan={10} className="px-3 py-6 text-center text-slate-400 dark:text-slate-500 italic text-[11px]">
+                            {searchQuery ? "No assets match your search." : "No assets."}
                           </td>
                         </tr>
                       )}
@@ -1768,19 +1760,19 @@ function Dashboard({ view, portfolios, setView }: { view: 'dashboard' | 'assets'
             )}
           </>
         ) : (
-          <Card className="h-72 flex flex-col items-center justify-center text-center rounded-xl border border-dashed border-slate-300 dark:border-slate-800 p-6">
-            <div className="w-16 h-16 bg-slate-50 dark:bg-slate-800 rounded-2xl flex items-center justify-center mb-4">
-              <Wallet className="text-slate-300 dark:text-slate-600 w-8 h-8" />
+          <Card className="h-56 flex flex-col items-center justify-center text-center rounded-xl border border-dashed border-slate-300 dark:border-slate-800 p-4">
+            <div className="w-12 h-12 bg-slate-50 dark:bg-slate-800 rounded-xl flex items-center justify-center mb-3">
+              <Wallet className="text-slate-300 dark:text-slate-600 w-6 h-6" />
             </div>
-            <h2 className="text-lg font-bold text-slate-900 dark:text-white">Start Your Journey</h2>
-            <p className="text-xs text-slate-500 dark:text-slate-400 mt-1 max-w-sm mx-auto">
-              Create your first portfolio to start tracking your investments in USD with real-time price data.
+            <h2 className="text-sm font-bold text-slate-900 dark:text-white">Start Your Journey</h2>
+            <p className="text-[11px] text-slate-500 dark:text-slate-400 mt-1 max-w-sm mx-auto">
+              Create your first portfolio to start tracking your investments.
             </p>
             <button 
               onClick={() => setView('settings')}
-              className="mt-6 bg-indigo-600 text-white px-6 py-2 rounded-xl text-sm font-bold hover:bg-indigo-700 transition-all shadow-lg shadow-indigo-100 dark:shadow-none"
+              className="mt-4 bg-indigo-600 text-white px-4 py-1.5 rounded-lg text-xs font-bold hover:bg-indigo-700 transition-all"
             >
-              Go to Settings to Create Portfolio
+              Create Portfolio
             </button>
           </Card>
         )}
