@@ -836,9 +836,16 @@ function EditAssetModal({ isOpen, onClose, onEdit, asset }: { isOpen: boolean; o
   );
 }
 
-function Dashboard({ view, portfolios, setView }: { view: 'dashboard' | 'assets' | 'settings'; portfolios: Portfolio[]; setView: (v: 'dashboard' | 'assets' | 'settings') => void }) {
+function Dashboard({ view, portfolios, setView, selectedPortfolioId, setSelectedPortfolioId, syncResult, setSyncResult }: { 
+  view: 'dashboard' | 'assets' | 'settings'; 
+  portfolios: Portfolio[]; 
+  setView: (v: 'dashboard' | 'assets' | 'settings') => void;
+  selectedPortfolioId: string | null;
+  setSelectedPortfolioId: (id: string | null) => void;
+  syncResult: { success: boolean; count: number } | null;
+  setSyncResult: (result: { success: boolean; count: number } | null) => void;
+}) {
   const authContext = useContext(AuthContext);
-  const [selectedPortfolioId, setSelectedPortfolioId] = useState<string | null>('all');
   const [assets, setAssets] = useState<Asset[]>([]);
   const [isAddAssetOpen, setIsAddAssetOpen] = useState(false);
   const [isEditAssetOpen, setIsEditAssetOpen] = useState(false);
@@ -900,9 +907,7 @@ function Dashboard({ view, portfolios, setView }: { view: 'dashboard' | 'assets'
     // };
   }, [selectedPortfolioId, authContext?.user]);
 
-  const [isSyncing, setIsSyncing] = useState(false);
   const [isRefreshingPrices, setIsRefreshingPrices] = useState(false);
-  const [syncResult, setSyncResult] = useState<{ success: boolean; count: number } | null>(null);
 
   const handleRefreshPrices = async () => {
     if (assets.length === 0 || !selectedPortfolioId || isRefreshingPrices) return;
@@ -949,20 +954,6 @@ function Dashboard({ view, portfolios, setView }: { view: 'dashboard' | 'assets'
       }
     } finally {
       setIsRefreshingPrices(false);
-    }
-  };
-
-  const handleSyncTefas = async () => {
-    setIsSyncing(true);
-    try {
-      const response = await fetch('/api/tefas/sync');
-      const result = await response.json();
-      setSyncResult(result);
-      setTimeout(() => setSyncResult(null), 5000);
-    } catch (error) {
-      console.error("Sync failed:", error);
-    } finally {
-      setIsSyncing(false);
     }
   };
 
@@ -1351,102 +1342,48 @@ function Dashboard({ view, portfolios, setView }: { view: 'dashboard' | 'assets'
     });
   }, [assets]);
 
-  return (
-    <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
-      <div className="space-y-8">
-        
-        {/* Header with Dropdown */}
-        <div className="flex flex-col md:flex-row md:items-center justify-between gap-6">
-          <div className="flex items-center gap-4">
-            <div className="w-12 h-12 bg-indigo-600 rounded-2xl flex items-center justify-center shadow-lg shadow-indigo-200 dark:shadow-none">
-              <LayoutDashboard className="text-white w-6 h-6" />
+return (
+    <div className="space-y-4">
+      {syncResult && (
+        <motion.div 
+          initial={{ opacity: 0, y: -10 }}
+          animate={{ opacity: 1, y: 0 }}
+          className={cn(
+            "p-3 rounded-xl border flex items-center justify-between",
+            syncResult.success 
+              ? "bg-emerald-50 dark:bg-emerald-900/20 border-emerald-100 dark:border-emerald-800 text-emerald-700 dark:text-emerald-400"
+              : "bg-rose-50 dark:bg-rose-900/20 border-rose-100 dark:border-rose-800 text-rose-700 dark:text-rose-400"
+          )}
+        >
+          <div className="flex items-center gap-2">
+            <div className={cn(
+              "w-6 h-6 rounded-lg flex items-center justify-center",
+              syncResult.success ? "bg-emerald-100 dark:bg-emerald-800" : "bg-rose-100 dark:bg-rose-800"
+            )}>
+              {syncResult.success ? <Check className="w-3 h-3" /> : <AlertCircle className="w-3 h-3" />}
             </div>
-            <div>
-              <h1 className="text-2xl font-bold text-slate-900 dark:text-white">Portfolio Overview</h1>
-              <p className="text-slate-500 dark:text-slate-400 text-sm">Manage and track your global assets</p>
-            </div>
+            <p className="text-xs font-bold">{syncResult.success ? `${syncResult.count} prices synced` : 'Sync failed'}</p>
           </div>
+          <button onClick={() => setSyncResult(null)} className="p-1 hover:bg-black/5 rounded-lg">
+            <X className="w-3 h-3" />
+          </button>
+        </motion.div>
+      )}
 
-          <div className="flex items-center gap-3">
-            <div className="relative">
-              <select
-                value={selectedPortfolioId || ''}
-                onChange={(e) => setSelectedPortfolioId(e.target.value)}
-                className="appearance-none bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 text-slate-900 dark:text-white px-4 py-2.5 pr-10 rounded-xl font-medium focus:ring-2 focus:ring-indigo-500 outline-none transition-all cursor-pointer min-w-[200px]"
-              >
-                <option value="all">All Portfolios</option>
-                {portfolios.map(p => (
-                  <option key={p.id} value={p.id}>{p.name}</option>
-                ))}
-              </select>
-              <ChevronDown className="absolute right-3 top-1/2 -translate-y-1/2 w-4 h-4 text-slate-400 pointer-events-none" />
-            </div>
-            <button 
-              onClick={handleSyncTefas}
-              disabled={isSyncing}
-              className={cn(
-                "p-2.5 rounded-xl transition-all border flex items-center gap-2",
-                isSyncing 
-                  ? "bg-indigo-50 dark:bg-indigo-900/20 text-indigo-400 border-indigo-100 dark:border-indigo-900/30" 
-                  : "bg-white dark:bg-slate-900 text-indigo-600 hover:bg-indigo-50 dark:hover:bg-indigo-900/20 border-slate-200 dark:border-slate-800"
-              )}
-              title="Sync TEFAS Prices"
-            >
-              <RefreshCw className={cn("w-5 h-5", isSyncing && "animate-spin")} />
-              <span className="text-sm font-bold hidden sm:inline">
-                {isSyncing ? 'Syncing...' : 'Sync TEFAS'}
-              </span>
-            </button>
-          </div>
-        </div>
-
-        {syncResult && (
-          <motion.div 
-            initial={{ opacity: 0, y: -20 }}
-            animate={{ opacity: 1, y: 0 }}
-            className={cn(
-              "p-4 rounded-2xl border flex items-center justify-between",
-              syncResult.success 
-                ? "bg-emerald-50 dark:bg-emerald-900/20 border-emerald-100 dark:border-emerald-800 text-emerald-700 dark:text-emerald-400"
-                : "bg-rose-50 dark:bg-rose-900/20 border-rose-100 dark:border-rose-800 text-rose-700 dark:text-rose-400"
-            )}
-          >
-            <div className="flex items-center gap-3">
-              <div className={cn(
-                "w-8 h-8 rounded-lg flex items-center justify-center",
-                syncResult.success ? "bg-emerald-100 dark:bg-emerald-800" : "bg-rose-100 dark:bg-rose-800"
-              )}>
-                {syncResult.success ? <Check className="w-4 h-4" /> : <AlertCircle className="w-4 h-4" />}
-              </div>
-              <div>
-                <p className="font-bold text-sm">{syncResult.success ? 'Sync Successful' : 'Sync Failed'}</p>
-                <p className="text-xs opacity-80">
-                  {syncResult.success 
-                    ? `Successfully updated ${syncResult.count} fund prices in the database.`
-                    : 'There was an error syncing prices from TEFAS.'}
-                </p>
-              </div>
-            </div>
-            <button onClick={() => setSyncResult(null)} className="p-1 hover:bg-black/5 rounded-lg transition-colors">
-              <X className="w-4 h-4" />
-            </button>
-          </motion.div>
-        )}
-
-        {selectedPortfolio ? (
-          <>
-            {view === 'dashboard' ? (
-              <>
-                {/* Summary Cards */}
-                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-3">
-                  <Card className="p-3 rounded-xl">
-                    <div className="flex items-center justify-between">
-                      <p className="text-[11px] font-medium text-slate-500 dark:text-slate-400">Total Value</p>
-                      <span className="text-[10px] font-bold text-emerald-600 bg-emerald-50 dark:bg-emerald-900/20 px-1 py-0.5 rounded">Live</span>
-                    </div>
-                    <p className="text-lg font-bold text-slate-900 dark:text-white mt-1">{formatCurrency(totalValue)}</p>
-                    <p className="text-[10px] text-slate-400">USD</p>
-                  </Card>
+      {selectedPortfolio ? (
+        <>
+          {view === 'dashboard' ? (
+            <>
+              {/* Summary Cards */}
+              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-3">
+                <Card className="p-3 rounded-xl">
+                  <div className="flex items-center justify-between">
+                    <p className="text-[11px] font-semibold text-slate-500 dark:text-slate-400">Total Value</p>
+                    <span className="text-[10px] font-bold text-emerald-600 bg-emerald-50 dark:bg-emerald-900/20 px-1 py-0.5 rounded">Live</span>
+                  </div>
+                  <p className="text-lg font-bold text-slate-900 dark:text-white mt-1">{formatCurrency(totalValue)}</p>
+                  <p className="text-[10px] text-slate-400">USD</p>
+                </Card>
 
                   <Card className="p-3 rounded-xl">
                     <div className="flex items-center justify-between">
@@ -1776,7 +1713,6 @@ function Dashboard({ view, portfolios, setView }: { view: 'dashboard' | 'assets'
             </button>
           </Card>
         )}
-      </div>
 
       {selectedPortfolioId && (
         <>
@@ -2001,6 +1937,9 @@ export default function App() {
   const [settingsTab, setSettingsTab] = useState<string>('portfolios');
   const [portfolios, setPortfolios] = useState<Portfolio[]>([]);
   const [assets, setAssets] = useState<Asset[]>([]);
+  const [selectedPortfolioId, setSelectedPortfolioId] = useState<string | null>('all');
+  const [isSyncing, setIsSyncing] = useState(false);
+  const [syncResult, setSyncResult] = useState<{ success: boolean; count: number } | null>(null);
   const [isDark, setIsDark] = useState(() => {
     if (typeof window !== 'undefined') {
       return localStorage.getItem('theme') === 'dark' || 
@@ -2119,6 +2058,20 @@ export default function App() {
     loadAssets();
   }, [user]);
 
+  const handleSyncTefas = async () => {
+    setIsSyncing(true);
+    try {
+      const response = await fetch('/api/tefas/sync');
+      const result = await response.json();
+      setSyncResult(result);
+      setTimeout(() => setSyncResult(null), 5000);
+    } catch (error) {
+      console.error("Sync failed:", error);
+    } finally {
+      setIsSyncing(false);
+    }
+  };
+
   const handleAddPortfolio = async (name: string, description: string, monthlyGoal: number, birthDate?: string, besEntryDate?: string) => {
     if (!user) return;
     try {
@@ -2206,8 +2159,46 @@ export default function App() {
               {user && <AppSidebar user={user} profile={profile} currentView={view} currentSettingsTab={settingsTab} setView={setView} setSettingsTab={setSettingsTab} />}
               <main className="flex-1">
                 {user && (
-                  <header className="flex h-16 shrink-0 items-center gap-2 border-b border-slate-200 dark:border-slate-800 px-4">
-                    <SidebarTrigger className="-ml-1" />
+                  <header className="flex h-14 shrink-0 items-center justify-between border-b border-slate-200 dark:border-slate-800 px-4">
+                    <div className="flex items-center gap-3">
+                      <SidebarTrigger className="-ml-1" />
+                      <div className="flex items-center gap-2">
+                        <h1 className="text-sm font-bold text-slate-900 dark:text-white">
+                          {view === 'dashboard' || view === 'assets' ? 'Portfolio' : 
+                           view === 'settings' ? 'Settings' :
+                           view === 'bes' ? 'Devlet Katkısı' :
+                           view === 'passive-income' ? 'Passive Income' :
+                           view === 'admin' ? 'Admin' : 'FinTrack'}
+                        </h1>
+                      </div>
+                    </div>
+                    {(view === 'dashboard' || view === 'assets') && (
+                      <div className="flex items-center gap-2">
+                        <select
+                          value={selectedPortfolioId || 'all'}
+                          onChange={(e) => setSelectedPortfolioId(e.target.value)}
+                          className="appearance-none bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 text-slate-900 dark:text-white px-3 py-1.5 pr-8 rounded-lg text-xs font-medium focus:ring-2 focus:ring-indigo-500 outline-none cursor-pointer"
+                        >
+                          <option value="all">All</option>
+                          {portfolios.map(p => (
+                            <option key={p.id} value={p.id}>{p.name}</option>
+                          ))}
+                        </select>
+                        <button
+                          onClick={handleSyncTefas}
+                          disabled={isSyncing}
+                          className={cn(
+                            "p-1.5 rounded-lg transition-all border flex items-center",
+                            isSyncing 
+                              ? "bg-indigo-50 dark:bg-indigo-900/20 text-indigo-400 border-indigo-100" 
+                              : "text-indigo-600 hover:bg-indigo-50 dark:hover:bg-indigo-900/20 border-slate-200 dark:border-slate-800"
+                          )}
+                          title="Sync TEFAS"
+                        >
+                          <RefreshCw className={cn("w-4 h-4", isSyncing && "animate-spin")} />
+                        </button>
+                      </div>
+                    )}
                   </header>
                 )}
                 <div className="p-4">
@@ -2238,7 +2229,15 @@ export default function App() {
                         />
                       )}
                       {(view === 'dashboard' || view === 'assets') && (
-                        <Dashboard view={view} portfolios={portfolios} setView={setView} />
+                        <Dashboard 
+                          view={view} 
+                          portfolios={portfolios} 
+                          setView={setView}
+                          selectedPortfolioId={selectedPortfolioId}
+                          setSelectedPortfolioId={setSelectedPortfolioId}
+                          syncResult={syncResult}
+                          setSyncResult={setSyncResult}
+                        />
                       )}
                     </>
                   ) : (
