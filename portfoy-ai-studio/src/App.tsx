@@ -1740,7 +1740,7 @@ function LandingPage() {
   };
 
   return (
-    <div className="min-h-[calc(100vh-72px)] flex items-center justify-center bg-gradient-to-br from-slate-50 via-indigo-50 to-purple-50 dark:from-slate-950 dark:via-indigo-950 dark:to-purple-950 px-4 py-12">
+    <div className="min-h-[calc(100vh-72px)] flex items-center justify-center bg-gray-100 dark:bg-gray-900 px-4 py-12">
       <div className="w-full max-w-md">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
